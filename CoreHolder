@@ -281,6 +281,7 @@ function Library:CreateMain()
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
 	
+	local script = Instance.new('LocalScript', UILibrary)
 	local gui = script.Parent
 	local dragging
 	local dragInput
@@ -317,7 +318,6 @@ function Library:CreateMain()
 			update(input)
 		end
 	end)
-	end
 	
 	local script = Instance.new('LocalScript', UIGradient)
 
