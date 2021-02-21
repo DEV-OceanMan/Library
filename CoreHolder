@@ -31,6 +31,7 @@ local Fill = Instance.new("ImageLabel")
 local ButtonHolder1 = Instance.new("Frame")
 local Button = Instance.new("ImageButton")
 local Title_4 = Instance.new("TextLabel")
+local UserInputService = game:GetService("UserInputService")
 
 syn.protect_gui(UILibrary)
 
@@ -279,7 +280,44 @@ function Library:CreateMain()
 	SectionsContainer.Position = UDim2.new(0.600000024, 0, 0.497707725, 0)
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
+	
+	local gui = script.Parent
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
 
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+	
 	local script = Instance.new('LocalScript', UIGradient)
 
 	local grad = script.Parent -- the gradient
@@ -293,44 +331,42 @@ function Library:CreateMain()
 			z = Color3.fromHSV(loop - ((i - 1)/range), 1, 1)  -- subtracting by a fraction essentially "rewinds" the color to a previous state
 			-- I subtract one from "i" because Lua has a starting index of one
 			if loop - ((i - 1) / range) < 0 then -- the minimum is 0, if it goes below, add one
-					z = Color3.fromHSV((loop - ((i - 1) / range)) + 1, 1, 1)
-				end
-					local d = ColorSequenceKeypoint.new((i - 1) / range, z)
-				table.insert(colors, #colors + 1, d) -- insert color into table
+				z = Color3.fromHSV((loop - ((i - 1) / range)) + 1, 1, 1)
 			end
+			local d = ColorSequenceKeypoint.new((i - 1) / range, z)
+			table.insert(colors, #colors + 1, d) -- insert color into table
+		end
 		grad.Color = ColorSequence.new(colors) -- apply colorsequence
 	end
-end
-	
-local GamerLibrary = {}
+	local GamerLibrary = {}
 
-function GamerLibrary:NewTab(name)	
+	function GamerLibrary:NewTab(name)	
 
-	local Home = Instance.new("ScrollingFrame")
-	local UIGridLayout_2 = Instance.new("UIGridLayout")
+		local Home = Instance.new("ScrollingFrame")
+		local UIGridLayout_2 = Instance.new("UIGridLayout")
 
-	Home.Name = name or "New Tab"
-	Home.Parent = SectionsContainer
-	Home.AnchorPoint = Vector2.new(0.5, 0.5)
-	Home.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	Home.BackgroundTransparency = 1.000
-	Home.BorderSizePixel = 0
-	Home.Position = UDim2.new(0.5, 0, 0.5, 0)
-	Home.Selectable = false
-	Home.Size = UDim2.new(0.997297287, 0, 1, 0)
-	Home.ZIndex = 4
-	Home.CanvasSize = UDim2.new(0, 0, 3, 0)
-	Home.ScrollBarThickness = 0
+		Home.Name = name or "New Tab"
+		Home.Parent = SectionsContainer
+		Home.AnchorPoint = Vector2.new(0.5, 0.5)
+		Home.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Home.BackgroundTransparency = 1.000
+		Home.BorderSizePixel = 0
+		Home.Position = UDim2.new(0.5, 0, 0.5, 0)
+		Home.Selectable = false
+		Home.Size = UDim2.new(0.997297287, 0, 1, 0)
+		Home.ZIndex = 4
+		Home.CanvasSize = UDim2.new(0, 0, 3, 0)
+		Home.ScrollBarThickness = 0
 
-	UIGridLayout_2.Parent = Home
-	UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-	UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
-	UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
+		UIGridLayout_2.Parent = Home
+		UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+		UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
+		UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
 
-	return GamerLibrary;
-end
+		return GamerLibrary;
+	end
 
-return Library;
+	return Library;
 
 
 --[[Button1.Name = "Button1"
@@ -475,5 +511,5 @@ Title_4.TextSize = 14.000
 Title_4.TextStrokeTransparency = 0.000
 Title_4.TextWrapped = true  --]]
 
--- Scripts:
+	-- Scripts:
 
