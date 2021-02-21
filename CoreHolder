@@ -317,6 +317,7 @@ function Library:CreateMain()
 			update(input)
 		end
 	end)
+	end
 	
 	local script = Instance.new('LocalScript', UIGradient)
 
