@@ -294,12 +294,16 @@ function Library:CreateMain()
 			-- I subtract one from "i" because Lua has a starting index of one
 			if loop - ((i - 1) / range) < 0 then -- the minimum is 0, if it goes below, add one
 				z = Color3.fromHSV((loop - ((i - 1) / range)) + 1, 1, 1)
-			end
+			
 			local d = ColorSequenceKeypoint.new((i - 1) / range, z)
 			table.insert(colors, #colors + 1, d) -- insert color into table
-		end
+		
 		grad.Color = ColorSequence.new(colors) -- apply colorsequence
+				end
+			end	
+		end
 	end
+	
 local GamerLibrary = {}
 
 function GamerLibrary:NewTab(name)	
