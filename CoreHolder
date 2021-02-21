@@ -282,13 +282,13 @@ function Library:CreateMain()
 	
 	local script = Instance.new('LocalScript', UIGradient)
 
-	grad = script.Parent -- the gradient
-	t = 1 -- amount of time it takes to get from 0 to 1
-	range = 19 -- amount of colors
+	local grad = script.Parent -- the gradient
+	local t = 1 -- amount of time it takes to get from 0 to 1
+	local range = 25 -- amount of colors
 
 	while wait() do
 		local loop = tick() % t / t -- returns value from 0 to 1
-		colors = {} -- table of colors
+		local colors = {} -- table of colors
 		for i = 1, range + 1, 1 do
 			z = Color3.fromHSV(loop - ((i - 1)/range), 1, 1)  -- subtracting by a fraction essentially "rewinds" the color to a previous state
 			-- I subtract one from "i" because Lua has a starting index of one
@@ -299,8 +299,46 @@ function Library:CreateMain()
 			table.insert(colors, #colors + 1, d) -- insert color into table
 		end
 		grad.Color = ColorSequence.new(colors) -- apply colorsequence
+	end
+	
+	local script = Instance.new('LocalScript', FrameContainer)	
+	local UIS = game:GetService("UserInputService")
+	function dragify(Frame)
+		dragToggle = nil
+		dragSpeed = 0.3
+		dragInput = nil
+		dragStart = nil
+		dragPos = nil
+		function updateInput(input)
+			Delta = input.Position - dragStart
+			Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.15), {Position = Position}):Play()
+		end
+		Frame.InputBegan:Connect(function(input)
+			if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
+				dragToggle = true
+				dragStart = input.Position
+				startPos = Frame.Position
+				input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragToggle = false
+					end
+				end)
 			end
-
+		end)
+		Frame.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+		game:GetService("UserInputService").InputChanged:Connect(function(input)
+			if input == dragInput and dragToggle then
+				updateInput(input)
+			end
+		end)
+	end
+	dragify(script.Parent)
+end
 	
 	local GamerLibrary = {}
 	
@@ -478,46 +516,4 @@ Title_4.TextStrokeTransparency = 0.000
 Title_4.TextWrapped = true  --]]
 
 -- Scripts:
---[[
-local function JAVCM_fake_script() -- FrameContainer.Drag 
-	local script = Instance.new('LocalScript', FrameContainer)	
-	local UIS = game:GetService("UserInputService")
-	function dragify(Frame)
-		dragToggle = nil
-		dragSpeed = 0.3
-		dragInput = nil
-		dragStart = nil
-		dragPos = nil
-		function updateInput(input)
-			Delta = input.Position - dragStart
-			Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.15), {Position = Position}):Play()
-		end
-		Frame.InputBegan:Connect(function(input)
-			if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
-				dragToggle = true
-				dragStart = input.Position
-				startPos = Frame.Position
-				input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						dragToggle = false
-					end
-				end)
-			end
-		end)
-		Frame.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-			end
-		end)
-		game:GetService("UserInputService").InputChanged:Connect(function(input)
-			if input == dragInput and dragToggle then
-				updateInput(input)
-			end
-		end)
-	end
-	dragify(script.Parent)
-	
-end
-coroutine.wrap(JAVCM_fake_script)()
---]]
+
