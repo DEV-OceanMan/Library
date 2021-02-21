@@ -31,7 +31,6 @@ local Fill = Instance.new("ImageLabel")
 local ButtonHolder1 = Instance.new("Frame")
 local Button = Instance.new("ImageButton")
 local Title_4 = Instance.new("TextLabel")
-local UserInputService = game:GetService("UserInputService")
 
 syn.protect_gui(UILibrary)
 
