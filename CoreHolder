@@ -32,8 +32,6 @@ local ButtonHolder1 = Instance.new("Frame")
 local Button = Instance.new("ImageButton")
 local Title_4 = Instance.new("TextLabel")
 
-syn.protect_gui(UILibrary)
-
 local Library = {}
 
 function Library:CreateMain()
