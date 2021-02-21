@@ -279,7 +279,7 @@ function Library:CreateMain()
 	SectionsContainer.Position = UDim2.new(0.600000024, 0, 0.497707725, 0)
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
-
+	end
 	local GamerLibrary = {}
 
 	function GamerLibrary:NewTab(name)	
