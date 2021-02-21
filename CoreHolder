@@ -32,15 +32,15 @@ local ButtonHolder1 = Instance.new("Frame")
 local Button = Instance.new("ImageButton")
 local Title_4 = Instance.new("TextLabel")
 
---syn.protect_gui(UILibrary)
+syn.protect_gui(UILibrary)
 
 local Library = {}
 
 function Library:CreateMain()
 
 	UILibrary.Name = "UI-Library"
-	--UILibrary.Parent = game:GetService("CoreGui")
-	UILibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	UILibrary.Parent = game:GetService("CoreGui")
+	--UILibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	UILibrary.ResetOnSpawn = false
 	UILibrary.DisplayOrder = 10
 
