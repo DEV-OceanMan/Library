@@ -364,8 +364,6 @@ end
 		UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
 		UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
 		UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
-		
-	end
 	
 	return GamerLibrary;
 end
