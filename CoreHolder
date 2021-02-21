@@ -284,7 +284,7 @@ function Library:CreateMain()
 
 	local grad = script.Parent -- the gradient
 	local t = 1 -- amount of time it takes to get from 0 to 1
-	local range = 20 -- amount of colors
+	local range = 19 -- amount of colors
 
 	while wait() do
 		local loop = tick() % t / t -- returns value from 0 to 1
