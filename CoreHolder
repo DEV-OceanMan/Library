@@ -196,7 +196,7 @@ function Library:CreateMain()
 	RightCap.Position = UDim2.new(1, 0, 0.5, 0)
 	RightCap.Size = UDim2.new(0.0500000007, 0, 0.999998987, 0)
 	RightCap.ZIndex = 4
-	
+
 	ButtonHandler.Name = "ButtonHandler"
 	ButtonHandler.Parent = CatagoryContainer
 	ButtonHandler.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -206,13 +206,13 @@ function Library:CreateMain()
 	ButtonHandler.Position = UDim2.new(0.5, 0, 0.5, 0)
 	ButtonHandler.Size = UDim2.new(0.899999976, 0, 0.949999988, 0)
 	ButtonHandler.ZIndex = 2
-	
+
 	UIGridLayout.Parent = ButtonHandler
 	UIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	UIGridLayout.CellPadding = UDim2.new(1, 0, 0.0500000007, 0)
 	UIGridLayout.CellSize = UDim2.new(1, 0, 0.100000001, 0)
-	
+
 	blackground.Name = "blackground"
 	blackground.Parent = Holder
 	blackground.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -225,7 +225,7 @@ function Library:CreateMain()
 	blackground.ScaleType = Enum.ScaleType.Slice
 	blackground.SliceCenter = Rect.new(100, 100, 100, 100)
 	blackground.SliceScale = 0.050
-	
+
 	BackGround.Name = "BackGround"
 	BackGround.Parent = Holder
 	BackGround.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -279,7 +279,7 @@ function Library:CreateMain()
 	SectionsContainer.Position = UDim2.new(0.600000024, 0, 0.497707725, 0)
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
-	
+
 	local script = Instance.new('LocalScript', UIGradient)
 
 	local grad = script.Parent -- the gradient
@@ -300,7 +300,7 @@ function Library:CreateMain()
 		end
 		grad.Color = ColorSequence.new(colors) -- apply colorsequence
 	end
-	
+
 	local script = Instance.new('LocalScript', FrameContainer)	
 	local UIS = game:GetService("UserInputService")
 	function dragify(Frame)
@@ -334,37 +334,37 @@ function Library:CreateMain()
 		game:GetService("UserInputService").InputChanged:Connect(function(input)
 			if input == dragInput and dragToggle then
 				updateInput(input)
+				dragify(script.Parent)
 			end
 		end)
 	end
-	dragify(script.Parent)
 end
-	
-	local GamerLibrary = {}
-	
-	function GamerLibrary:NewTab(name)	
-		
-		local Home = Instance.new("ScrollingFrame")
-		local UIGridLayout_2 = Instance.new("UIGridLayout")
-		
-		Home.Name = name or "New Tab"
-		Home.Parent = SectionsContainer
-		Home.AnchorPoint = Vector2.new(0.5, 0.5)
-		Home.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Home.BackgroundTransparency = 1.000
-		Home.BorderSizePixel = 0
-		Home.Position = UDim2.new(0.5, 0, 0.5, 0)
-		Home.Selectable = false
-		Home.Size = UDim2.new(0.997297287, 0, 1, 0)
-		Home.ZIndex = 4
-		Home.CanvasSize = UDim2.new(0, 0, 3, 0)
-		Home.ScrollBarThickness = 0
 
-		UIGridLayout_2.Parent = Home
-		UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-		UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
-		UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
-	
+local GamerLibrary = {}
+
+function GamerLibrary:NewTab(name)	
+
+	local Home = Instance.new("ScrollingFrame")
+	local UIGridLayout_2 = Instance.new("UIGridLayout")
+
+	Home.Name = name or "New Tab"
+	Home.Parent = SectionsContainer
+	Home.AnchorPoint = Vector2.new(0.5, 0.5)
+	Home.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Home.BackgroundTransparency = 1.000
+	Home.BorderSizePixel = 0
+	Home.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Home.Selectable = false
+	Home.Size = UDim2.new(0.997297287, 0, 1, 0)
+	Home.ZIndex = 4
+	Home.CanvasSize = UDim2.new(0, 0, 3, 0)
+	Home.ScrollBarThickness = 0
+
+	UIGridLayout_2.Parent = Home
+	UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+	UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
+	UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
+
 	return GamerLibrary;
 end
 
