@@ -352,7 +352,7 @@ function Library:CreateMain()
 	DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
 	DropShadow_2.ZIndex = 2
 	DropShadow_2.Image = "rbxassetid://3570695787"
-	DropShadow_2.ImageColor3 = Color3.fromRGB(113, 255, 108)
+	DropShadow_2.ImageColor3 = Color3.fromRGB(20, 20, 20)
 	DropShadow_2.ScaleType = Enum.ScaleType.Slice
 	DropShadow_2.SliceCenter = Rect.new(100, 100, 100, 100)
 	DropShadow_2.SliceScale = 0.050
