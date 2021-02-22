@@ -8,6 +8,8 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
+version = " v1.00"
+
 local function RandomName()
 	local data = ""
 	for i=0,20,1 do
@@ -54,8 +56,6 @@ local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 
 function Library:CreateMain()
-
-Title.Text = game.Name.. " - " ..game.PlaceId.. " --// HELLCOCK HUB \\-- "
 
 local Info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
 local T1 = TS:Create(Resize, Info, {Rotation = -90})
@@ -180,7 +180,7 @@ Title.Position = UDim2.new(0.0299999993, 0, 0.5, 0)
 Title.Size = UDim2.new(0.910000026, 0, 0.400000006, 0)
 Title.ZIndex = 4
 Title.Font = Enum.Font.GothamBlack
-Title.Text = "N/A - ID"
+Title.Text = game.Name.. " - " ..game.PlaceId.. " --// HELLCOCK HUB \\\-- " ..version
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextScaled = true
 Title.TextSize = 14.000
