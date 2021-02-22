@@ -8,11 +8,11 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
-version = " v1.00"
+local version = " v1.3"
 
 local function RandomName()
 	local data = ""
-	for i=0,20,1 do
+	for i=0,100,1 do
 		data = data .. tostring(string.char(math.ceil(math.random() * 254)))
 	end
 	return data
@@ -37,7 +37,6 @@ local blackground = Instance.new("ImageLabel")
 local BackGround = Instance.new("ImageLabel")
 local LOGO = Instance.new("ImageLabel")
 local DropShadow_2 = Instance.new("ImageLabel")
-local UIGradient = Instance.new("UIGradient")
 local SectionsContainer = Instance.new("Frame")
 local ToggleHolder = Instance.new("Frame")
 local Title_3 = Instance.new("TextLabel")
@@ -52,14 +51,26 @@ syn.protect_gui(UILibrary)
 
 local Library = {}
 
+function Library:Create(obj, data)
+		obj = Instance.new(obj)
+			for i, v in pairs(data) do
+				if i ~= "Parent" then
+					obj[i] = v
+				end
+			end
+		obj.Parent = data.Parent
+	return obj
+end
+
+
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 
 function Library:CreateMain()
 
-local Info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
-local T1 = TS:Create(Resize, Info, {Rotation = -90})
-local T2 = TS:Create(Resize, Info, {Rotation = 90})
+	local Info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+	local T1 = TS:Create(Resize, Info, {Rotation = -90})
+	local T2 = TS:Create(Resize, Info, {Rotation = 90})
 	Resize.MouseButton1Click:Connect(function()
 		if Holder.Position == UDim2.new(0.5, 0, 0.5, 0) then
 			Holder:TweenPosition(UDim2.new(0.5, 0, -0.5, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.5, true)
@@ -69,32 +80,32 @@ local T2 = TS:Create(Resize, Info, {Rotation = 90})
 			Holder:TweenPosition(UDim2.new(0.5, 0, 0.5, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.5, true)
 			T2:Play()
 			DropShadow:TweenSize(UDim2.new(1.05, 0, 1.08, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.5, true)
-	end
-end)
-	
-UIS.InputBegan:Connect(function(Input)
-	if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode == Enum.KeyCode.Insert then
-		if FrameContainer.Visible == true then
-			FrameContainer.Visible = false
-		else
-			if FrameContainer.Visible == false then
-				FrameContainer.Visible = true
+		end
+	end)
+
+	UIS.InputBegan:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode == Enum.KeyCode.Insert then
+			if FrameContainer.Visible == true then
+				FrameContainer.Visible = false
+			else
+				if FrameContainer.Visible == false then
+					FrameContainer.Visible = true
+				end
 			end
 		end
+	end)
+
+	local gui = FrameContainer
+
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 	end
-end)
-
-local gui = FrameContainer
-
-local dragging
-local dragInput
-local dragStart
-local startPos
-
-local function update(input)
-local delta = input.Position - dragStart
-	gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
 	gui.InputBegan:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
@@ -107,357 +118,326 @@ end
 			end)
 		end
 	end)
-		gui.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-	end
-end)
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
 	UIS.InputChanged:Connect(function(input)
 		if input == dragInput and dragging then
 			update(input)
-	end
-end)
-
-UILibrary.Name = "UI-Library"
-UILibrary.Parent = game:GetService("CoreGui")
-UILibrary.ResetOnSpawn = false
-UILibrary.DisplayOrder = 10
-UILibrary.Name = RandomName()
-    
-FrameContainer.Name = "FrameContainer"
-FrameContainer.Parent = UILibrary
-FrameContainer.Active = true
-FrameContainer.AnchorPoint = Vector2.new(0.5, 0.5)
-FrameContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-FrameContainer.BackgroundTransparency = 1.000
-FrameContainer.BorderSizePixel = 0
-FrameContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
-FrameContainer.Size = UDim2.new(0, 500, 0, 300)
-FrameContainer.ZIndex = 2
-FrameContainer.Image = "rbxassetid://3570695787"
-FrameContainer.ImageColor3 = Color3.fromRGB(15, 15, 15)
-FrameContainer.ImageTransparency = 1.000
-FrameContainer.ScaleType = Enum.ScaleType.Slice
-FrameContainer.SliceCenter = Rect.new(100, 100, 100, 100)
-FrameContainer.SliceScale = 0.050
-
-DropShadow.Name = "DropShadow"
-DropShadow.Parent = FrameContainer
-DropShadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-DropShadow.BackgroundTransparency = 1.000
-DropShadow.BorderSizePixel = 0
-DropShadow.Position = UDim2.new(-0.0250000004, 0, -0.0399999991, 0)
-DropShadow.Size = UDim2.new(1.04999995, 0, 1.08000004, 0)
-DropShadow.ZIndex = -1
-DropShadow.Image = "rbxassetid://297774371"
-DropShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
-DropShadow.ImageTransparency = 0.500
-DropShadow.ScaleType = Enum.ScaleType.Slice
-DropShadow.SliceCenter = Rect.new(100, 100, 100, 100)
-DropShadow.SliceScale = 0.100
-
-TopContainer.Name = "TopContainer"
-TopContainer.Parent = FrameContainer
-TopContainer.AnchorPoint = Vector2.new(0.5, 0)
-TopContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TopContainer.BackgroundTransparency = 1.000
-TopContainer.BorderSizePixel = 0
-TopContainer.Position = UDim2.new(0.5, 0, 0, 0)
-TopContainer.Size = UDim2.new(1, 0, 0.100000001, 0)
-TopContainer.ZIndex = 3
-TopContainer.Image = "rbxassetid://3570695787"
-TopContainer.ImageColor3 = Color3.fromRGB(20, 20, 20)
-TopContainer.ScaleType = Enum.ScaleType.Slice
-TopContainer.SliceCenter = Rect.new(100, 100, 100, 100)
-TopContainer.SliceScale = 0.050
-
-Title.Name = "Title"
-Title.Parent = TopContainer
-Title.AnchorPoint = Vector2.new(0, 0.5)
-Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1.000
-Title.Position = UDim2.new(0.0299999993, 0, 0.5, 0)
-Title.Size = UDim2.new(0.910000026, 0, 0.400000006, 0)
-Title.ZIndex = 4
-Title.Font = Enum.Font.GothamBlack
-Title.Text = game.Name.. " - " ..game.PlaceId.. " --// HELLCOCK HUB \\\-- " ..version
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.TextScaled = true
-Title.TextSize = 14.000
-Title.TextStrokeTransparency = 0.000
-Title.TextWrapped = true
-Title.TextXAlignment = Enum.TextXAlignment.Left
-
-Resize.Name = "Resize"
-Resize.Parent = TopContainer
-Resize.Active = false
-Resize.AnchorPoint = Vector2.new(1, 0.5)
-Resize.BackgroundTransparency = 1.000
-Resize.Position = UDim2.new(1, 0, 0.5, 0)
-Resize.Rotation = 90.000
-Resize.Selectable = false
-Resize.Size = UDim2.new(0.0599999987, 0, 1, 0)
-Resize.ZIndex = 5
-Resize.Image = "rbxassetid://4370337241"
-Resize.ScaleType = Enum.ScaleType.Fit
-
-BottomCap.Name = "BottomCap"
-BottomCap.Parent = TopContainer	
-BottomCap.AnchorPoint = Vector2.new(0.5, 1)
-BottomCap.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-BottomCap.BorderSizePixel = 0
-BottomCap.Position = UDim2.new(0.5, 0, 1, 0)
-BottomCap.Size = UDim2.new(1, 0, 0.189999998, 0)
-BottomCap.ZIndex = 4
-
-ActualBottomCap.Name = "ActualBottomCap"
-ActualBottomCap.Parent = TopContainer
-ActualBottomCap.AnchorPoint = Vector2.new(0.5, 1)
-ActualBottomCap.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-ActualBottomCap.BackgroundTransparency = 1.000
-ActualBottomCap.BorderSizePixel = 0
-ActualBottomCap.Position = UDim2.new(0.5, 0, 1.13052475, 0)
-ActualBottomCap.Size = UDim2.new(1, 0, 1.03052354, 0)
-ActualBottomCap.ZIndex = 0
-ActualBottomCap.Image = "rbxassetid://3570695787"
-ActualBottomCap.ImageColor3 = Color3.fromRGB(20, 20, 20)
-ActualBottomCap.ScaleType = Enum.ScaleType.Slice
-ActualBottomCap.SliceCenter = Rect.new(100, 100, 100, 100)
-ActualBottomCap.SliceScale = 0.050
-
-SlideContainer.Name = "SlideContainer"
-SlideContainer.Parent = FrameContainer
-SlideContainer.Active = true
-SlideContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SlideContainer.BackgroundTransparency = 1.000
-SlideContainer.BorderColor3 = Color3.fromRGB(27, 42, 53)
-SlideContainer.BorderSizePixel = 0
-SlideContainer.ClipsDescendants = true
-SlideContainer.Position = UDim2.new(0, 0, 0.100000001, 0)
-SlideContainer.Size = UDim2.new(1, 0, 0.900000095, 0)
-SlideContainer.ZIndex = 5
-
-Holder.Name = "Holder"
-Holder.Parent = SlideContainer
-Holder.AnchorPoint = Vector2.new(0.5, 0.5)
-Holder.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
-Holder.BackgroundTransparency = 1.000
-Holder.Position = UDim2.new(0.5, 0, 0.5, 0)
-Holder.Size = UDim2.new(1, 0, 1, 0)
-
-CatagoryContainer.Name = "CatagoryContainer"
-CatagoryContainer.Parent = Holder
-CatagoryContainer.AnchorPoint = Vector2.new(0, 1)
-CatagoryContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-CatagoryContainer.BackgroundTransparency = 1.000
-CatagoryContainer.Position = UDim2.new(0, 0, 1.0000006, 0)
-CatagoryContainer.Size = UDim2.new(0.200000003, 0, 1.00458503, 0)
-CatagoryContainer.ZIndex = 3
-CatagoryContainer.Image = "rbxassetid://3570695787"
-CatagoryContainer.ImageColor3 = Color3.fromRGB(26, 26, 26)
-CatagoryContainer.ScaleType = Enum.ScaleType.Slice
-CatagoryContainer.SliceCenter = Rect.new(100, 100, 100, 100)
-CatagoryContainer.SliceScale = 0.050
-
-BottomCap_2.Name = "BottomCap"
-BottomCap_2.Parent = CatagoryContainer
-BottomCap_2.AnchorPoint = Vector2.new(0.5, 0)
-BottomCap_2.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
-BottomCap_2.BorderSizePixel = 0
-BottomCap_2.Position = UDim2.new(0.5, 0, 0, 0)
-BottomCap_2.Size = UDim2.new(1, 0, 0.0189999994, 0)
-BottomCap_2.ZIndex = 4
-
-RightCap.Name = "RightCap"
-RightCap.Parent = CatagoryContainer
-RightCap.AnchorPoint = Vector2.new(1, 0.5)
-RightCap.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
-RightCap.BorderSizePixel = 0
-RightCap.Position = UDim2.new(1, 0, 0.5, 0)
-RightCap.Size = UDim2.new(0.0500000007, 0, 0.999998987, 0)
-RightCap.ZIndex = 4
-
-ButtonHandler.Name = "ButtonHandler"
-ButtonHandler.Parent = CatagoryContainer
-ButtonHandler.AnchorPoint = Vector2.new(0.5, 0.5)
-ButtonHandler.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ButtonHandler.BackgroundTransparency = 1.000
-ButtonHandler.ClipsDescendants = true
-ButtonHandler.Position = UDim2.new(0.5, 0, 0.5, 0)
-ButtonHandler.Size = UDim2.new(0.899999976, 0, 0.949999988, 0)
-ButtonHandler.ZIndex = 2
-
-UIGridLayout.Parent = ButtonHandler
-UIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIGridLayout.CellPadding = UDim2.new(1, 0, 0.0500000007, 0)
-UIGridLayout.CellSize = UDim2.new(1, 0, 0.100000001, 0)
-
-blackground.Name = "blackground"
-blackground.Parent = Holder
-blackground.AnchorPoint = Vector2.new(0.5, 0.5)
-blackground.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-blackground.BackgroundTransparency = 1.000
-blackground.Position = UDim2.new(0.5, 0, 0.489444524, 0)
-blackground.Size = UDim2.new(1, 0, 1.02111113, 0)
-blackground.Image = "rbxassetid://3570695787"
-blackground.ImageColor3 = Color3.fromRGB(15, 15, 15)
-blackground.ScaleType = Enum.ScaleType.Slice
-blackground.SliceCenter = Rect.new(100, 100, 100, 100)
-blackground.SliceScale = 0.050
-
-BackGround.Name = "BackGround"
-BackGround.Parent = Holder
-BackGround.AnchorPoint = Vector2.new(0.5, 0.5)
-BackGround.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-BackGround.BackgroundTransparency = 1.000
-BackGround.Position = UDim2.new(0.600000024, 0, 0.496296287, 0)
-BackGround.Size = UDim2.new(0.764999986, 0, 0.937612593, 0)
-BackGround.ZIndex = 3
-BackGround.Image = "rbxassetid://3570695787"
-BackGround.ImageColor3 = Color3.fromRGB(26, 26, 26)
-BackGround.ScaleType = Enum.ScaleType.Slice
-BackGround.SliceCenter = Rect.new(100, 100, 100, 100)
-BackGround.SliceScale = 0.050
-
-LOGO.Name = "LOGO"
-LOGO.Parent = BackGround
-LOGO.AnchorPoint = Vector2.new(0.5, 0.5)
-LOGO.BackgroundTransparency = 1.000
-LOGO.Position = UDim2.new(0.5, 0, 0.5, 0)
-LOGO.Size = UDim2.new(0.19273001, 0, 0.312252969, 0)
-LOGO.ZIndex = 4
-LOGO.Image = "rbxassetid://3610245066"
-LOGO.ImageColor3 = Color3.fromRGB(0, 0, 0)
-LOGO.ImageTransparency = 0.100
-LOGO.ScaleType = Enum.ScaleType.Fit
-
-DropShadow_2.Name = "DropShadow"
-DropShadow_2.Parent = BackGround
-DropShadow_2.BackgroundColor3 = Color3.fromRGB(113, 255, 108)
-DropShadow_2.BackgroundTransparency = 1.000
-DropShadow_2.BorderSizePixel = 0
-DropShadow_2.Position = UDim2.new(0, 0, 0, 3)
-DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
-DropShadow_2.ZIndex = 2
-DropShadow_2.Image = "rbxassetid://3570695787"
-DropShadow_2.ImageColor3 = Color3.fromRGB(113, 255, 108)
-DropShadow_2.ScaleType = Enum.ScaleType.Slice
-DropShadow_2.SliceCenter = Rect.new(100, 100, 100, 100)
-DropShadow_2.SliceScale = 0.050
-
-UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 170, 0)), ColorSequenceKeypoint.new(0.15, Color3.fromRGB(127, 0, 255)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 170, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(85, 255, 0)), ColorSequenceKeypoint.new(0.85, Color3.fromRGB(43, 34, 170)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 0))}
-UIGradient.Parent = DropShadow_2
-
-SectionsContainer.Name = "SectionsContainer"
-SectionsContainer.Parent = Holder
-SectionsContainer.AnchorPoint = Vector2.new(0.5, 0.5)
-SectionsContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-SectionsContainer.BackgroundTransparency = 1.000
-SectionsContainer.BorderSizePixel = 0
-SectionsContainer.ClipsDescendants = true
-SectionsContainer.Position = UDim2.new(0.600000024, 0, 0.497707725, 0)
-SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
-SectionsContainer.ZIndex = 4
-	--SCRIPT--
-
-	-- SCRIPT --
-	local script = Instance.new('LocalScript', UIGradient)
-
-	local grad = script.Parent -- the gradient
-	local t = 1 -- amount of time it takes to get from 0 to 1
-	local range = 15 -- amount of colors
-
-	while wait() do
-		local loop = tick() % t / t -- returns value from 0 to 1
-		local colors = {} -- table of colors
-		for i = 1, range + 1, 1 do
-			z = Color3.fromHSV(loop - ((i - 1)/range), 1, 1)  -- subtracting by a fraction essentially "rewinds" the color to a previous state
-			-- I subtract one from "i" because Lua has a starting index of one
-			if loop - ((i - 1) / range) < 0 then -- the minimum is 0, if it goes below, add one
-				z = Color3.fromHSV((loop - ((i - 1) / range)) + 1, 1, 1)
-			end
-			local d = ColorSequenceKeypoint.new((i - 1) / range, z)
-			table.insert(colors, #colors + 1, d) -- insert color into table
 		end
-		grad.Color = ColorSequence.new(colors) -- apply colorsequence
-	end
-	--SCRIPT--
+	end)
+
+	UILibrary.Name = "UI-Library"
+	UILibrary.Parent = game:GetService("CoreGui")
+	UILibrary.ResetOnSpawn = false
+	UILibrary.DisplayOrder = 10
+	UILibrary.Name = RandomName()
+
+	FrameContainer.Name = "FrameContainer"
+	FrameContainer.Parent = UILibrary
+	FrameContainer.Active = true
+	FrameContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+	FrameContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	FrameContainer.BackgroundTransparency = 1.000
+	FrameContainer.BorderSizePixel = 0
+	FrameContainer.Position = UDim2.new(0.5, 0, 0.5, 0)
+	FrameContainer.Size = UDim2.new(0, 500, 0, 300)
+	FrameContainer.ZIndex = 2
+	FrameContainer.Image = "rbxassetid://3570695787"
+	FrameContainer.ImageColor3 = Color3.fromRGB(15, 15, 15)
+	FrameContainer.ImageTransparency = 1.000
+	FrameContainer.ScaleType = Enum.ScaleType.Slice
+	FrameContainer.SliceCenter = Rect.new(100, 100, 100, 100)
+	FrameContainer.SliceScale = 0.050
+
+	DropShadow.Name = "DropShadow"
+	DropShadow.Parent = FrameContainer
+	DropShadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	DropShadow.BackgroundTransparency = 1.000
+	DropShadow.BorderSizePixel = 0
+	DropShadow.Position = UDim2.new(-0.0250000004, 0, -0.0399999991, 0)
+	DropShadow.Size = UDim2.new(1.04999995, 0, 1.08000004, 0)
+	DropShadow.ZIndex = -1
+	DropShadow.Image = "rbxassetid://297774371"
+	DropShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	DropShadow.ImageTransparency = 0.500
+	DropShadow.ScaleType = Enum.ScaleType.Slice
+	DropShadow.SliceCenter = Rect.new(100, 100, 100, 100)
+	DropShadow.SliceScale = 0.100
+
+	TopContainer.Name = "TopContainer"
+	TopContainer.Parent = FrameContainer
+	TopContainer.AnchorPoint = Vector2.new(0.5, 0)
+	TopContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TopContainer.BackgroundTransparency = 1.000
+	TopContainer.BorderSizePixel = 0
+	TopContainer.Position = UDim2.new(0.5, 0, 0, 0)
+	TopContainer.Size = UDim2.new(1, 0, 0.100000001, 0)
+	TopContainer.ZIndex = 3
+	TopContainer.Image = "rbxassetid://3570695787"
+	TopContainer.ImageColor3 = Color3.fromRGB(20, 20, 20)
+	TopContainer.ScaleType = Enum.ScaleType.Slice
+	TopContainer.SliceCenter = Rect.new(100, 100, 100, 100)
+	TopContainer.SliceScale = 0.050
+
+	Title.Name = "Title"
+	Title.Parent = TopContainer
+	Title.AnchorPoint = Vector2.new(0, 0.5)
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.Position = UDim2.new(0.0299999993, 0, 0.5, 0)
+	Title.Size = UDim2.new(0.910000026, 0, 0.400000006, 0)
+	Title.ZIndex = 4
+	Title.Font = Enum.Font.GothamBlack
+	Title.Text = game.Name.. " - " ..game.PlaceId.. " --* HELLCOCK HUB *-- " ..version
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextScaled = true
+	Title.TextSize = 14.000
+	Title.TextStrokeTransparency = 0.000
+	Title.TextWrapped = true
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+
+	Resize.Name = "Resize"
+	Resize.Parent = TopContainer
+	Resize.Active = false
+	Resize.AnchorPoint = Vector2.new(1, 0.5)
+	Resize.BackgroundTransparency = 1.000
+	Resize.Position = UDim2.new(1, 0, 0.5, 0)
+	Resize.Rotation = 90.000
+	Resize.Selectable = false
+	Resize.Size = UDim2.new(0.0599999987, 0, 1, 0)
+	Resize.ZIndex = 5
+	Resize.Image = "rbxassetid://4370337241"
+	Resize.ScaleType = Enum.ScaleType.Fit
+
+	BottomCap.Name = "BottomCap"
+	BottomCap.Parent = TopContainer	
+	BottomCap.AnchorPoint = Vector2.new(0.5, 1)
+	BottomCap.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	BottomCap.BorderSizePixel = 0
+	BottomCap.Position = UDim2.new(0.5, 0, 1, 0)
+	BottomCap.Size = UDim2.new(1, 0, 0.189999998, 0)
+	BottomCap.ZIndex = 4
+
+	ActualBottomCap.Name = "ActualBottomCap"
+	ActualBottomCap.Parent = TopContainer
+	ActualBottomCap.AnchorPoint = Vector2.new(0.5, 1)
+	ActualBottomCap.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	ActualBottomCap.BackgroundTransparency = 1.000
+	ActualBottomCap.BorderSizePixel = 0
+	ActualBottomCap.Position = UDim2.new(0.5, 0, 1.13052475, 0)
+	ActualBottomCap.Size = UDim2.new(1, 0, 1.03052354, 0)
+	ActualBottomCap.ZIndex = 0
+	ActualBottomCap.Image = "rbxassetid://3570695787"
+	ActualBottomCap.ImageColor3 = Color3.fromRGB(20, 20, 20)
+	ActualBottomCap.ScaleType = Enum.ScaleType.Slice
+	ActualBottomCap.SliceCenter = Rect.new(100, 100, 100, 100)
+	ActualBottomCap.SliceScale = 0.050
+
+	SlideContainer.Name = "SlideContainer"
+	SlideContainer.Parent = FrameContainer
+	SlideContainer.Active = true
+	SlideContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SlideContainer.BackgroundTransparency = 1.000
+	SlideContainer.BorderColor3 = Color3.fromRGB(27, 42, 53)
+	SlideContainer.BorderSizePixel = 0
+	SlideContainer.ClipsDescendants = true
+	SlideContainer.Position = UDim2.new(0, 0, 0.100000001, 0)
+	SlideContainer.Size = UDim2.new(1, 0, 0.900000095, 0)
+	SlideContainer.ZIndex = 5
+
+	Holder.Name = "Holder"
+	Holder.Parent = SlideContainer
+	Holder.AnchorPoint = Vector2.new(0.5, 0.5)
+	Holder.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	Holder.BackgroundTransparency = 1.000
+	Holder.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Holder.Size = UDim2.new(1, 0, 1, 0)
+
+	CatagoryContainer.Name = "CatagoryContainer"
+	CatagoryContainer.Parent = Holder
+	CatagoryContainer.AnchorPoint = Vector2.new(0, 1)
+	CatagoryContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	CatagoryContainer.BackgroundTransparency = 1.000
+	CatagoryContainer.Position = UDim2.new(0, 0, 1.0000006, 0)
+	CatagoryContainer.Size = UDim2.new(0.200000003, 0, 1.00458503, 0)
+	CatagoryContainer.ZIndex = 3
+	CatagoryContainer.Image = "rbxassetid://3570695787"
+	CatagoryContainer.ImageColor3 = Color3.fromRGB(26, 26, 26)
+	CatagoryContainer.ScaleType = Enum.ScaleType.Slice
+	CatagoryContainer.SliceCenter = Rect.new(100, 100, 100, 100)
+	CatagoryContainer.SliceScale = 0.050
+
+	BottomCap_2.Name = "BottomCap"
+	BottomCap_2.Parent = CatagoryContainer
+	BottomCap_2.AnchorPoint = Vector2.new(0.5, 0)
+	BottomCap_2.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+	BottomCap_2.BorderSizePixel = 0
+	BottomCap_2.Position = UDim2.new(0.5, 0, 0, 0)
+	BottomCap_2.Size = UDim2.new(1, 0, 0.0189999994, 0)
+	BottomCap_2.ZIndex = 4
+
+	RightCap.Name = "RightCap"
+	RightCap.Parent = CatagoryContainer
+	RightCap.AnchorPoint = Vector2.new(1, 0.5)
+	RightCap.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+	RightCap.BorderSizePixel = 0
+	RightCap.Position = UDim2.new(1, 0, 0.5, 0)
+	RightCap.Size = UDim2.new(0.0500000007, 0, 0.999998987, 0)
+	RightCap.ZIndex = 4
+
+	ButtonHandler.Name = "ButtonHandler"
+	ButtonHandler.Parent = CatagoryContainer
+	ButtonHandler.AnchorPoint = Vector2.new(0.5, 0.5)
+	ButtonHandler.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ButtonHandler.BackgroundTransparency = 1.000
+	ButtonHandler.ClipsDescendants = true
+	ButtonHandler.Position = UDim2.new(0.5, 0, 0.5, 0)
+	ButtonHandler.Size = UDim2.new(0.899999976, 0, 0.949999988, 0)
+	ButtonHandler.ZIndex = 2
+
+	UIGridLayout.Parent = ButtonHandler
+	UIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIGridLayout.CellPadding = UDim2.new(1, 0, 0.0500000007, 0)
+	UIGridLayout.CellSize = UDim2.new(1, 0, 0.100000001, 0)
+
+	blackground.Name = "blackground"
+	blackground.Parent = Holder
+	blackground.AnchorPoint = Vector2.new(0.5, 0.5)
+	blackground.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	blackground.BackgroundTransparency = 1.000
+	blackground.Position = UDim2.new(0.5, 0, 0.489444524, 0)
+	blackground.Size = UDim2.new(1, 0, 1.02111113, 0)
+	blackground.Image = "rbxassetid://3570695787"
+	blackground.ImageColor3 = Color3.fromRGB(15, 15, 15)
+	blackground.ScaleType = Enum.ScaleType.Slice
+	blackground.SliceCenter = Rect.new(100, 100, 100, 100)
+	blackground.SliceScale = 0.050
+
+	BackGround.Name = "BackGround"
+	BackGround.Parent = Holder
+	BackGround.AnchorPoint = Vector2.new(0.5, 0.5)
+	BackGround.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	BackGround.BackgroundTransparency = 1.000
+	BackGround.Position = UDim2.new(0.600000024, 0, 0.496296287, 0)
+	BackGround.Size = UDim2.new(0.764999986, 0, 0.937612593, 0)
+	BackGround.ZIndex = 3
+	BackGround.Image = "rbxassetid://3570695787"
+	BackGround.ImageColor3 = Color3.fromRGB(26, 26, 26)
+	BackGround.ScaleType = Enum.ScaleType.Slice
+	BackGround.SliceCenter = Rect.new(100, 100, 100, 100)
+	BackGround.SliceScale = 0.050
+
+	LOGO.Name = "LOGO"
+	LOGO.Parent = BackGround
+	LOGO.AnchorPoint = Vector2.new(0.5, 0.5)
+	LOGO.BackgroundTransparency = 1.000
+	LOGO.Position = UDim2.new(0.5, 0, 0.5, 0)
+	LOGO.Size = UDim2.new(0.19273001, 0, 0.312252969, 0)
+	LOGO.ZIndex = 4
+	LOGO.Image = "rbxassetid://3610245066"
+	LOGO.ImageColor3 = Color3.fromRGB(0, 0, 0)
+	LOGO.ImageTransparency = 0.100
+	LOGO.ScaleType = Enum.ScaleType.Fit
+
+	DropShadow_2.Name = "DropShadow"
+	DropShadow_2.Parent = BackGround
+	DropShadow_2.BackgroundColor3 = Color3.fromRGB(113, 255, 108)
+	DropShadow_2.BackgroundTransparency = 1.000
+	DropShadow_2.BorderSizePixel = 0
+	DropShadow_2.Position = UDim2.new(0, 0, 0, 3)
+	DropShadow_2.Size = UDim2.new(1, 0, 1, 0)
+	DropShadow_2.ZIndex = 2
+	DropShadow_2.Image = "rbxassetid://3570695787"
+	DropShadow_2.ImageColor3 = Color3.fromRGB(20, 20, 20)
+	DropShadow_2.ScaleType = Enum.ScaleType.Slice
+	DropShadow_2.SliceCenter = Rect.new(100, 100, 100, 100)
+	DropShadow_2.SliceScale = 0.050
+
+	SectionsContainer.Name = "SectionsContainer"
+	SectionsContainer.Parent = Holder
+	SectionsContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+	SectionsContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SectionsContainer.BackgroundTransparency = 1.000
+	SectionsContainer.BorderSizePixel = 0
+	SectionsContainer.ClipsDescendants = true
+	SectionsContainer.Position = UDim2.new(0.600000024, 0, 0.497707725, 0)
+	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
+	SectionsContainer.ZIndex = 4
 
 	local GamerLibrary = {}
-	
-	function GamerLibrary:NewTab(name)	
 
-		local Home = Instance.new("ScrollingFrame")
-		local UIGridLayout_2 = Instance.new("UIGridLayout")
-		
-		Home.Name = name or "New Tab"
-		Home.Parent = SectionsContainer
-		Home.AnchorPoint = Vector2.new(0.5, 0.5)
-		Home.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Home.BackgroundTransparency = 1.000
-		Home.BorderSizePixel = 0
-		Home.Position = UDim2.new(0.5, 0, 0.5, 0)
-		Home.Selectable = false
-		Home.Size = UDim2.new(0.997297287, 0, 1, 0)
-		Home.ZIndex = 4
-		Home.CanvasSize = UDim2.new(0, 0, 3, 0)
-		Home.ScrollBarThickness = 0
+function GamerLibrary:NewTab(name)	
 
-		UIGridLayout_2.Parent = Home
-		UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-		UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
-		UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
-		
+local Home = Instance.new("ScrollingFrame")
+local UIGridLayout_2 = Instance.new("UIGridLayout")
+
+Home.Name = name or "New Tab"
+Home.Parent = SectionsContainer
+Home.AnchorPoint = Vector2.new(0.5, 0.5)
+Home.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Home.BackgroundTransparency = 1.000
+Home.BorderSizePixel = 0
+Home.Position = UDim2.new(0.5, 0, 0.5, 0)
+Home.Selectable = false
+Home.Size = UDim2.new(0.997297287, 0, 1, 0)
+Home.ZIndex = 4
+Home.CanvasSize = UDim2.new(0, 0, 3, 0)
+Home.ScrollBarThickness = 0
+
+UIGridLayout_2.Parent = Home
+UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
+UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
 		
 		name.Button.MouseEnter:Connect(function()
-			name.Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
-		end)
+		name.Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
+	end)
 		name.Button.MouseLeave:Connect(function()
-			name.Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
-		end)
-		print"did"
-		
-	end
-	
-	function GamerLibrary:NewButton(name)
-		
-		local Button1 = Instance.new("ImageButton")
-		local Title_2 = Instance.new("TextLabel")
-		
-		Button1.Name = "Button"
-		Button1.Parent = ButtonHandler
-		Button1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Button1.BackgroundTransparency = 1.000
-		Button1.BorderSizePixel = 0
-		Button1.Size = UDim2.new(0, 80, 0, 25)
-		Button1.ZIndex = 4
-		Button1.Image = "rbxassetid://3570695787"
-		Button1.ImageColor3 = Color3.fromRGB(50, 50, 50)
-		Button1.ScaleType = Enum.ScaleType.Slice
-		Button1.SliceCenter = Rect.new(100, 100, 100, 100)
-		Button1.SliceScale = 0.030
-
-		Title_2.Name = "Title"
-		Title_2.Parent = Button1
-		Title_2.AnchorPoint = Vector2.new(0, 0.5)
-		Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Title_2.BackgroundTransparency = 1.000
-		Title_2.Position = UDim2.new(0, 0, 0.5, 0)
-		Title_2.Size = UDim2.new(1, 0, 1, 0)
-		Title_2.ZIndex = 5
-		Title_2.Font = Enum.Font.TitilliumWeb
-		Title_2.Text = name or "New Button"
-		Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_2.TextScaled = true
-		Title_2.TextSize = 14.000
-		Title_2.TextStrokeTransparency = 0.000
-		Title_2.TextWrapped = true
-		
-		print"done"
-	end
-	return GamerLibrary;
+		name.Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
+	end)
 end
+
+	function GamerLibrary:NewButton(name)
+
+local Button1 = Instance.new("ImageButton")
+local Title_2 = Instance.new("TextLabel")
+
+Button1.Name = "Button"
+Button1.Parent = ButtonHandler
+Button1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Button1.BackgroundTransparency = 1.000
+Button1.BorderSizePixel = 0
+Button1.Size = UDim2.new(0, 80, 0, 25)
+Button1.ZIndex = 4
+Button1.Image = "rbxassetid://3570695787"
+Button1.ImageColor3 = Color3.fromRGB(50, 50, 50)
+Button1.ScaleType = Enum.ScaleType.Slice
+Button1.SliceCenter = Rect.new(100, 100, 100, 100)
+Button1.SliceScale = 0.030
+
+Title_2.Name = "Title"
+Title_2.Parent = Button1
+Title_2.AnchorPoint = Vector2.new(0, 0.5)
+Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title_2.BackgroundTransparency = 1.000
+Title_2.Position = UDim2.new(0, 0, 0.5, 0)
+Title_2.Size = UDim2.new(1, 0, 1, 0)
+Title_2.ZIndex = 5
+Title_2.Font = Enum.Font.TitilliumWeb
+Title_2.Text = name or "New Button"
+Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title_2.TextScaled = true
+Title_2.TextSize = 14.000
+Title_2.TextStrokeTransparency = 0.000
+Title_2.TextWrapped = true
+
+			end
+		return GamerLibrary;
+	end
 return Library;
 
 
@@ -575,5 +555,3 @@ Title_4.TextScaled = true
 Title_4.TextSize = 14.000
 Title_4.TextStrokeTransparency = 0.000
 Title_4.TextWrapped = true  --]]
-
--- Scripts:
