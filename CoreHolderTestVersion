@@ -56,7 +56,7 @@ local Library = {}
 local UIS = game:GetService("UserInputService")
 local tabcount = 0
 local buttoncount = {}
-
+--[[
 local function draggable(obj)
 	local globals = {}
 	globals.dragging=nil
@@ -81,7 +81,7 @@ local function draggable(obj)
 	end
 end)
 
-
+--]]
 Print("Loaded Drag")
 
 local function RandomName()
