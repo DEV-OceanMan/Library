@@ -308,7 +308,8 @@ function Library:CreateMain()
 	SectionsContainer.ZIndex = 4
 	
 	--SCRIPT--
-	UILibrary.InputBegan:Connect(function(Input)
+	local UIS = game:GetService("UserInputService")
+	UIS.InputBegan:Connect(function(Input)
 		if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode == Enum.KeyCode.Insert then
 			if UILibrary.Enabled == true then
 				UILibrary.Enabled = false
