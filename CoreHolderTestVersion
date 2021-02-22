@@ -8,11 +8,11 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
-version = " v1.00"
+local version = " v1.00"
 
 local function RandomName()
 	local data = ""
-	for i=0,20,1 do
+	for i=0,100,1 do
 		data = data .. tostring(string.char(math.ceil(math.random() * 254)))
 	end
 	return data
@@ -192,7 +192,7 @@ function Library:CreateMain()
 	Title.Size = UDim2.new(0.910000026, 0, 0.400000006, 0)
 	Title.ZIndex = 4
 	Title.Font = Enum.Font.GothamBlack
-	Title.Text = game.Name.. " - " ..game.PlaceId.. " --// HELLCOCK HUB \\\-- " ..version
+	Title.Text = game.Name.. " - " ..game.PlaceId.. " --* HELLCOCK HUB *-- " ..version
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 	Title.TextScaled = true
 	Title.TextSize = 14.000
@@ -397,78 +397,74 @@ function Library:CreateMain()
 
 	local GamerLibrary = {}
 
-	function GamerLibrary:NewTab(name)	
+function GamerLibrary:NewTab(name)	
 
-		local Home = Instance.new("ScrollingFrame")
-		local UIGridLayout_2 = Instance.new("UIGridLayout")
+local Home = Instance.new("ScrollingFrame")
+local UIGridLayout_2 = Instance.new("UIGridLayout")
 
-		Home.Name = name or "New Tab"
-		Home.Parent = SectionsContainer
-		Home.AnchorPoint = Vector2.new(0.5, 0.5)
-		Home.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Home.BackgroundTransparency = 1.000
-		Home.BorderSizePixel = 0
-		Home.Position = UDim2.new(0.5, 0, 0.5, 0)
-		Home.Selectable = false
-		Home.Size = UDim2.new(0.997297287, 0, 1, 0)
-		Home.ZIndex = 4
-		Home.CanvasSize = UDim2.new(0, 0, 3, 0)
-		Home.ScrollBarThickness = 0
+Home.Name = name or "New Tab"
+Home.Parent = SectionsContainer
+Home.AnchorPoint = Vector2.new(0.5, 0.5)
+Home.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Home.BackgroundTransparency = 1.000
+Home.BorderSizePixel = 0
+Home.Position = UDim2.new(0.5, 0, 0.5, 0)
+Home.Selectable = false
+Home.Size = UDim2.new(0.997297287, 0, 1, 0)
+Home.ZIndex = 4
+Home.CanvasSize = UDim2.new(0, 0, 3, 0)
+Home.ScrollBarThickness = 0
 
-		UIGridLayout_2.Parent = Home
-		UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-		UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
-		UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
-
-
+UIGridLayout_2.Parent = Home
+UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
+UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
+		
 		name.Button.MouseEnter:Connect(function()
-			name.Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
-		end)
+		name.Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
+	end)
 		name.Button.MouseLeave:Connect(function()
-			name.Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
-		end)
-		print"did"
-
-	end
+		name.Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
+	end)
+end
 
 	function GamerLibrary:NewButton(name)
 
-		local Button1 = Instance.new("ImageButton")
-		local Title_2 = Instance.new("TextLabel")
+local Button1 = Instance.new("ImageButton")
+local Title_2 = Instance.new("TextLabel")
 
-		Button1.Name = "Button"
-		Button1.Parent = ButtonHandler
-		Button1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Button1.BackgroundTransparency = 1.000
-		Button1.BorderSizePixel = 0
-		Button1.Size = UDim2.new(0, 80, 0, 25)
-		Button1.ZIndex = 4
-		Button1.Image = "rbxassetid://3570695787"
-		Button1.ImageColor3 = Color3.fromRGB(50, 50, 50)
-		Button1.ScaleType = Enum.ScaleType.Slice
-		Button1.SliceCenter = Rect.new(100, 100, 100, 100)
-		Button1.SliceScale = 0.030
+Button1.Name = "Button"
+Button1.Parent = ButtonHandler
+Button1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Button1.BackgroundTransparency = 1.000
+Button1.BorderSizePixel = 0
+Button1.Size = UDim2.new(0, 80, 0, 25)
+Button1.ZIndex = 4
+Button1.Image = "rbxassetid://3570695787"
+Button1.ImageColor3 = Color3.fromRGB(50, 50, 50)
+Button1.ScaleType = Enum.ScaleType.Slice
+Button1.SliceCenter = Rect.new(100, 100, 100, 100)
+Button1.SliceScale = 0.030
 
-		Title_2.Name = "Title"
-		Title_2.Parent = Button1
-		Title_2.AnchorPoint = Vector2.new(0, 0.5)
-		Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Title_2.BackgroundTransparency = 1.000
-		Title_2.Position = UDim2.new(0, 0, 0.5, 0)
-		Title_2.Size = UDim2.new(1, 0, 1, 0)
-		Title_2.ZIndex = 5
-		Title_2.Font = Enum.Font.TitilliumWeb
-		Title_2.Text = name or "New Button"
-		Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_2.TextScaled = true
-		Title_2.TextSize = 14.000
-		Title_2.TextStrokeTransparency = 0.000
-		Title_2.TextWrapped = true
+Title_2.Name = "Title"
+Title_2.Parent = Button1
+Title_2.AnchorPoint = Vector2.new(0, 0.5)
+Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title_2.BackgroundTransparency = 1.000
+Title_2.Position = UDim2.new(0, 0, 0.5, 0)
+Title_2.Size = UDim2.new(1, 0, 1, 0)
+Title_2.ZIndex = 5
+Title_2.Font = Enum.Font.TitilliumWeb
+Title_2.Text = name or "New Button"
+Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title_2.TextScaled = true
+Title_2.TextSize = 14.000
+Title_2.TextStrokeTransparency = 0.000
+Title_2.TextWrapped = true
 
-		print"done"
+			end
+		return GamerLibrary;
 	end
-	return GamerLibrary;
-end
 return Library;
 
 
@@ -586,5 +582,3 @@ Title_4.TextScaled = true
 Title_4.TextSize = 14.000
 Title_4.TextStrokeTransparency = 0.000
 Title_4.TextWrapped = true  --]]
-
--- Scripts:
