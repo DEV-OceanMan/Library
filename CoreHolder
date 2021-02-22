@@ -52,6 +52,8 @@ syn.protect_gui(UILibrary)
 
 local Library = {}
 
+local UIS = game:GetService("UserInputService")
+
 function Library:CreateMain()
 	
 	local ts = game:GetService("TweenService")
@@ -316,7 +318,6 @@ function Library:CreateMain()
 	--SCRIPT--
 	
 	--SCRIPT--
-	local UIS = game:GetService("UserInputService")
 	UIS.InputBegan:Connect(function(Input)
 		if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode == Enum.KeyCode.Insert then
 			if FrameContainer.Visible == true then
