@@ -8,13 +8,14 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
---local function RandomName()
-	--local data = ""
-	--for i=0,20,1 do
-		--data = data .. tostring(string.char(math.ceil(math.random() * 254)))
-	--end
-	--return data
---end
+local function RandomName()
+	local data = ""
+	for i=0,20,1 do
+		data = data .. tostring(string.char(math.ceil(math.random() * 254)))
+	end
+	return data
+end
+Print("Loaded RandomName")
 
 -- Instances:
 
@@ -81,6 +82,8 @@ local function draggable(obj)
 	end)
 end
 
+Print("Loaded Drag")
+
 local function RandomName()
 	local data = ""
 	for i=0,20,1 do
@@ -88,6 +91,8 @@ local function RandomName()
 	end
 	return data
 end
+
+Print("Randomized Name")
 
 function Library:Create(obj, data)
 	obj = Instance.new(obj)
@@ -99,6 +104,9 @@ function Library:Create(obj, data)
 	obj.Parent = data.Parent
 	return obj
 end
+
+
+Print("CREATE BS")
 
 function Library:CreateMain()
 
