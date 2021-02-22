@@ -8,13 +8,13 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
-local function RandomName()
-	local data = ""
-	for i=0,20,1 do
-		data = data .. tostring(string.char(math.ceil(math.random() * 254)))
-	end
-	return data
-end
+--local function RandomName()
+	--local data = ""
+	--for i=0,20,1 do
+		--data = data .. tostring(string.char(math.ceil(math.random() * 254)))
+	--end
+	--return data
+--end
 
 -- Instances:
 
