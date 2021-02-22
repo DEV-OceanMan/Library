@@ -12,7 +12,7 @@ local version = " v1.1"
 
 local function RandomName()
 	local data = ""
-	for i=0,100,1 do
+	for i=0,20,1 do
 		data = data .. tostring(string.char(math.ceil(math.random() * 254)))
 	end
 	return data
