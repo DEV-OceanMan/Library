@@ -52,16 +52,16 @@ syn.protect_gui(UILibrary)
 
 local Library = {}
 
-function Library:Create(obj, data)
-	obj = Instance.new(obj)
-	for i, v in pairs(data) do
-		if i ~= "Parent" then
-			obj[i] = v
-		end
-	end
-	obj.Parent = data.Parent
-	return obj
-end
+-- function Library:Create(obj, data)
+	-- obj = Instance.new(obj)
+	-- for i, v in pairs(data) do
+		-- if i ~= "Parent" then
+			-- obj[i] = v
+		-- end
+	-- end
+	-- obj.Parent = data.Parent
+	-- return obj
+-- end
 
 
 local UIS = game:GetService("UserInputService")
