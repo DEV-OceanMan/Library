@@ -78,9 +78,9 @@ local function draggable(obj)
 		if input.UserInputType == Enum.UserInputType.MouseMovement and globals.dragging then
 			local change = input.Position - globals.morigin
 			obj.Position = UDim2.new(globals.uiorigin.X.Scale,globals.uiorigin.X.Offset+change.X,globals.uiorigin.Y.Scale,globals.uiorigin.Y.Offset+change.Y)
-		end
-	end)
-end
+	end
+end)
+
 
 Print("Loaded Drag")
 
@@ -90,7 +90,6 @@ local function RandomName()
 		data = data .. tostring(string.char(math.ceil(math.random() * 254)))
 	end
 	return data
-end
 
 Print("Randomized Name")
 
