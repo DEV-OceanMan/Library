@@ -15,7 +15,6 @@ local function RandomName()
 	end
 	return data
 end
-Print("Loaded RandomName")
 
 -- Instances:
 
@@ -54,60 +53,9 @@ syn.protect_gui(UILibrary)
 local Library = {}
 
 local UIS = game:GetService("UserInputService")
-local tabcount = 0
-local buttoncount = {}
-
-local function draggable(obj)
-	local globals = {}
-	globals.dragging=nil
-	globals.uiorigin=nil
-	globals.morigin=nil
-	obj.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 then
-			globals.dragging = true
-			globals.uiorigin = obj.Position
-			globals.morigin = input.Position
-			input.Changed:Connect(function()
-				if input.UserInputState == Enum.UserInputState.End then
-					globals.dragging = false
-				end
-			end)
-		end
-	end)
-	UIS.InputChanged:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseMovement and globals.dragging then
-			local change = input.Position - globals.morigin
-			obj.Position = UDim2.new(globals.uiorigin.X.Scale,globals.uiorigin.X.Offset+change.X,globals.uiorigin.Y.Scale,globals.uiorigin.Y.Offset+change.Y)
-	end
-end)
-
-Print("Loaded Drag")
-
---local function RandomName()
-	--local data = ""
-	--for i=0,20,1 do
-		--data = data .. tostring(string.char(math.ceil(math.random() * 254)))
-	--end
-	--return data
-
-Print("Randomized Name")
-
---function Library:Create(obj, data)
-	--obj = Instance.new(obj)
-	--for i, v in pairs(data) do
-		--if i ~= "Parent" then
-			--obj[i] = v
-	--	end
-	--end
-	--obj.Parent = data.Parent
-	--return obj
---end
-
-
-Print("CREATE BS")
 
 function Library:CreateMain()
-
+	
 	local ts = game:GetService("TweenService")
 	local info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
 	local t1 = ts:Create(Resize, info, {Rotation = -90})
@@ -130,7 +78,7 @@ function Library:CreateMain()
 	UILibrary.ResetOnSpawn = false
 	UILibrary.DisplayOrder = 10
 	UILibrary.Name = RandomName()
-
+    
 	FrameContainer.Name = "FrameContainer"
 	FrameContainer.Parent = UILibrary
 	FrameContainer.Active = true
@@ -366,9 +314,9 @@ function Library:CreateMain()
 	SectionsContainer.Position = UDim2.new(0.600000024, 0, 0.497707725, 0)
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
-
+	
 	--SCRIPT--
-
+	
 	--SCRIPT--
 	UIS.InputBegan:Connect(function(Input)
 		if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode == Enum.KeyCode.Insert then
@@ -384,6 +332,46 @@ function Library:CreateMain()
 	--SCRIPT--    
 	Title.Text = game.Name.. " - " ..game.PlaceId.. " --// HELLCOCK HUB \\-- "
 	--SCRIPT--
+	local script = Instance.new('LocalScript', FrameContainer)
+	local gui = script.Parent
+	local UserInputService = game:GetService("UserInputService")
+
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+
+				end
+			end)
+		end
+	end)
+	
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
 	-- SCRIPT --
 	local script = Instance.new('LocalScript', UIGradient)
 
@@ -407,11 +395,13 @@ function Library:CreateMain()
 	end
 	--SCRIPT--
 
-	function Library:NewTab(name)	
+	local GamerLibrary = {}
+	
+	function GamerLibrary:NewTab(name)	
 
 		local Home = Instance.new("ScrollingFrame")
 		local UIGridLayout_2 = Instance.new("UIGridLayout")
-
+		
 		Home.Name = name or "New Tab"
 		Home.Parent = SectionsContainer
 		Home.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -429,8 +419,8 @@ function Library:CreateMain()
 		UIGridLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
 		UIGridLayout_2.CellPadding = UDim2.new(0, 0, 0, 5)
 		UIGridLayout_2.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
-
-
+		
+		
 		name.Button.MouseEnter:Connect(function()
 			name.Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
 		end)
@@ -438,14 +428,14 @@ function Library:CreateMain()
 			name.Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
 		end)
 		print"did"
-
+		
 	end
-
-	function Library:NewButton(name)
-		buttoncount[tonumber(	.Name)] = buttoncount[tonumber(tab.Name)]+1
+	
+	function GamerLibrary:NewButton(name)
+		
 		local Button1 = Instance.new("ImageButton")
 		local Title_2 = Instance.new("TextLabel")
-
+		
 		Button1.Name = "Button"
 		Button1.Parent = ButtonHandler
 		Button1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -474,7 +464,7 @@ function Library:CreateMain()
 		Title_2.TextSize = 14.000
 		Title_2.TextStrokeTransparency = 0.000
 		Title_2.TextWrapped = true
-
+		
 		print"done"
 	end
 	return GamerLibrary;
