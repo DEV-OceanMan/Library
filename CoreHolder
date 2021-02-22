@@ -1,3 +1,14 @@
+--[[
+			 __  __  ____    __       __       ____     _____   ____     __  __     
+			/\ \/\ \/\  _`\ /\ \     /\ \     /\  _`\  /\  __`\/\  _`\  /\ \/\ \    
+			\ \ \_\ \ \ \L\_\ \ \    \ \ \    \ \ \/\_\\ \ \/\ \ \ \/\_\\ \ \/'/'   
+			 \ \  _  \ \  _\L\ \ \  __\ \ \  __\ \ \/_/_\ \ \ \ \ \ \/_/_\ \ , <    
+			  \ \ \ \ \ \ \L\ \ \ \L\ \\ \ \L\ \\ \ \L\ \\ \ \_\ \ \ \L\ \\ \ \\`\  
+			   \ \_\ \_\ \____/\ \____/ \ \____/ \ \____/ \ \_____\ \____/ \ \_\ \_\
+			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
+ --]]
+
+
 -- Instances:
 
 local UILibrary = Instance.new("ScreenGui")
@@ -296,10 +307,21 @@ function Library:CreateMain()
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
 	
-	
+	--SCRIPT--
+	UILibrary.InputBegan:Connect(function(Input)
+		if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode == Enum.KeyCode.Insert then
+			if UILibrary.Enabled == true then
+				UILibrary.Enabled = false
+			else
+				if UILibrary.Enabled == false then
+					UILibrary.Enabled = true
+				end
+			end
+		end
+	end)
 	--SCRIPT--
 	UILibrary.DisplayOrder = 10
-	Title.Text = game.Name.. " - " ..game.PlaceId.. " // HELLCOCK HUB "
+	Title.Text = game.Name.. " - " ..game.PlaceId.. "--// HELLCOCK HUB \\--"
 	--SCRIPT--
 	local script = Instance.new('LocalScript', FrameContainer)
 	local gui = script.Parent
@@ -329,7 +351,7 @@ function Library:CreateMain()
 			end)
 		end
 	end)
-
+	
 	gui.InputChanged:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 			dragInput = input
