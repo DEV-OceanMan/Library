@@ -38,9 +38,6 @@ local Library = {}
 
 function Library:CreateMain()
 	
-	UILibrary.DisplayOrder = 10
-	Title.Text = game.Name.. " - " ..game.PlaceId.. " // HELL**** HUB "
-	
 	local ts = game:GetService("TweenService")
 	local info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
 	local t1 = ts:Create(Resize, info, {Rotation = -90})
@@ -298,8 +295,11 @@ function Library:CreateMain()
 	SectionsContainer.Position = UDim2.new(0.600000024, 0, 0.497707725, 0)
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
-
-
+	
+	
+	--SCRIPT--
+	UILibrary.DisplayOrder = 10
+	Title.Text = game.Name.. " - " ..game.PlaceId.. " // HELLCOCK HUB "
 	--SCRIPT--
 	local script = Instance.new('LocalScript', FrameContainer)
 	local gui = script.Parent
