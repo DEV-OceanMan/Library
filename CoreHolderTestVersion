@@ -84,7 +84,7 @@ UIS.InputBegan:Connect(function(Input)
 	end
 end)
 
-local gui = UILibrary
+local gui = FrameContainer
 
 local dragging
 local dragInput
