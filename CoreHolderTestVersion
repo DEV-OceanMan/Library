@@ -56,7 +56,7 @@ local Library = {}
 local UIS = game:GetService("UserInputService")
 local tabcount = 0
 local buttoncount = {}
---[[
+
 local function draggable(obj)
 	local globals = {}
 	globals.dragging=nil
@@ -81,28 +81,27 @@ local function draggable(obj)
 	end
 end)
 
---]]
 Print("Loaded Drag")
 
-local function RandomName()
-	local data = ""
-	for i=0,20,1 do
-		data = data .. tostring(string.char(math.ceil(math.random() * 254)))
-	end
-	return data
+--local function RandomName()
+	--local data = ""
+	--for i=0,20,1 do
+		--data = data .. tostring(string.char(math.ceil(math.random() * 254)))
+	--end
+	--return data
 
 Print("Randomized Name")
 
-function Library:Create(obj, data)
-	obj = Instance.new(obj)
-	for i, v in pairs(data) do
-		if i ~= "Parent" then
-			obj[i] = v
-		end
-	end
-	obj.Parent = data.Parent
-	return obj
-end
+--function Library:Create(obj, data)
+	--obj = Instance.new(obj)
+	--for i, v in pairs(data) do
+		--if i ~= "Parent" then
+			--obj[i] = v
+	--	end
+	--end
+	--obj.Parent = data.Parent
+	--return obj
+--end
 
 
 Print("CREATE BS")
