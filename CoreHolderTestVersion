@@ -37,7 +37,6 @@ local blackground = Instance.new("ImageLabel")
 local BackGround = Instance.new("ImageLabel")
 local LOGO = Instance.new("ImageLabel")
 local DropShadow_2 = Instance.new("ImageLabel")
-local UIGradient = Instance.new("UIGradient")
 local SectionsContainer = Instance.new("Frame")
 local ToggleHolder = Instance.new("Frame")
 local Title_3 = Instance.new("TextLabel")
@@ -357,9 +356,6 @@ function Library:CreateMain()
 	DropShadow_2.ScaleType = Enum.ScaleType.Slice
 	DropShadow_2.SliceCenter = Rect.new(100, 100, 100, 100)
 	DropShadow_2.SliceScale = 0.050
-
-	UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 170, 0)), ColorSequenceKeypoint.new(0.15, Color3.fromRGB(127, 0, 255)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 170, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(85, 255, 0)), ColorSequenceKeypoint.new(0.85, Color3.fromRGB(43, 34, 170)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 255, 0))}
-	UIGradient.Parent = DropShadow_2
 
 	SectionsContainer.Name = "SectionsContainer"
 	SectionsContainer.Parent = Holder
