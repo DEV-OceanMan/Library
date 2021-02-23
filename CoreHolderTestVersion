@@ -43,8 +43,6 @@ local Title_3 = Instance.new("TextLabel")
 local Toggle = Instance.new("ImageButton")
 local Icon = Instance.new("ImageLabel")
 local Fill = Instance.new("ImageLabel")
-local ButtonHolder1 = Instance.new("Frame")
-local Button = Instance.new("ImageButton")
 local Title_4 = Instance.new("TextLabel")
 
 syn.protect_gui(UILibrary)
@@ -66,6 +64,7 @@ end
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 local TabCount = 0
+local ButtonCount = {}
 
 function Library:CreateMain()
 
@@ -369,16 +368,14 @@ function Library:CreateMain()
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
 
-	function Library:NewTab(name)	
+	function Library:NewTab(name)
 		TabCount = TabCount + 1
-		--local Tab = Instance.new("ScrollingFrame")
-		--local UIGridLayout_2 = Instance.new("UIGridLayout")
 		local Tab = self:Create("ScrollingFrame", {
 			Name = tostring(TabCount),
 			Parent = SectionsContainer,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-			BackgroundTransparency = 0,
+			BackgroundTransparency = 1.000,
 			BorderSizePixel = 0,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			Selectable = false,
@@ -386,54 +383,97 @@ function Library:CreateMain()
 			ZIndex = 4,
 			CanvasSize = UDim2.new(0, 0, 3, 0),
 			ScrollBarThickness = 0,
+			Visible = false
 		})
-		--local UIGridLayout = self:Create("UIGridLayout", {
-		--	UIGridLayout.Parent = Tab
-		--	UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
-		--	UIGridLayout.CellPadding = UDim2.new(0, 0, 0, 5)
-		--	UIGridLayout.CellSize = UDim2.new(1, 0, 0.0500000007, 0)
-		--})
+		local UIGridLayout = self:Create("UIGridLayout", {
+			Parent = Tab,
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			CellPadding = UDim2.new(0, 0, 0, 5),
+			CellSize = UDim2.new(1, 0, 0.0500000007, 0),
+		})
+		
+		local Button = self:Create("ImageButton", {
+		Name = "Button",
+		Parent = ButtonHandler,
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1.000,
+		BorderSizePixel = 0,
+		Size = UDim2.new(0, 80, 0, 25),
+		ZIndex = 4,
+		Image = "rbxassetid://3570695787",
+		ImageColor3 = Color3.fromRGB(50, 50, 50),
+		ScaleType = Enum.ScaleType.Slice,
+		SliceCenter = Rect.new(100, 100, 100, 100),
+		SliceScale = 0.030,
+	})
+		local Title = self:Create("TextLabel", {
+		Name = "Title",
+		Parent = Button,
+		AnchorPoint = Vector2.new(0, 0.5),
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1.000,
+		Position = UDim2.new(0, 0, 0.5, 0),
+		Size = UDim2.new(1, 0, 1, 0),
+		ZIndex = 5,
+		Font = Enum.Font.TitilliumWeb,
+		Text = name or "New Button",
+		TextColor3 = Color3.fromRGB(255, 255, 255),
+		TextScaled = true,
+		TextSize = 14.000,
+		TextStrokeTransparency = 0.000,
+		TextWrapped = true,
+	})
 	end
 
-	function Library:NewButton(name)
+	function Library:NewButton(Tab,Text,Callback)
+		ButtonCount[tonumber(Tab.Name)] = ButtonCount[tonumber(Tab.Name)]+1
+		
+		local ButtonHolder = self:Create("Frame", {
+		Parent = Tab,
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1.000,
+		BorderSizePixel = 0,
+		Position = UDim2.new(0.5, 0, 0.5, 0),
+		Size = UDim2.new(1, 0, 0.150000006, 0),
+		ZIndex = 5,
+	})
+		local Button = self:Create("ImageButton", {
+		Name = "Button",
+		Parent = ButtonHolder,
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+		BackgroundTransparency = 1.000,
+		Position = UDim2.new(0.5, 0, 0.5, 0),
+		Size = UDim2.new(1, 0, 1, 0),
+		ZIndex = 6,
+		Image = "rbxassetid://3570695787",
+		ImageColor3 = Color3.fromRGB(35, 35, 35),
+		ScaleType = Enum.ScaleType.Slice,
+		SliceCenter = Rect.new(100, 100, 100, 100),
+		SliceScale = 0.060,
+	})
+		Title_4.Name = "Title"
+		Title_4.Parent = Button
+		Title_4.AnchorPoint = Vector2.new(0.5, 0.5)
+		Title_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Title_4.BackgroundTransparency = 1.000
+		Title_4.Position = UDim2.new(0.5, 0, 0.5, 0)
+		Title_4.Size = UDim2.new(1, 0, 0.5, 0)
+		Title_4.ZIndex = 7
+		Title_4.Font = Enum.Font.FredokaOne
+		Title_4.Text = "N/A"
+		Title_4.TextColor3 = Color3.fromRGB(169, 169, 169)
+		Title_4.TextScaled = true
+		Title_4.TextSize = 14.000
+		Title_4.TextStrokeTransparency = 0.000
+		Title_4.TextWrapped = true
 
-		local Button1 = Instance.new("ImageButton")
-		local Title_2 = Instance.new("TextLabel")
-
-		Button1.Name = "Button"
-		Button1.Parent = ButtonHandler
-		Button1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Button1.BackgroundTransparency = 1.000
-		Button1.BorderSizePixel = 0
-		Button1.Size = UDim2.new(0, 80, 0, 25)
-		Button1.ZIndex = 4
-		Button1.Image = "rbxassetid://3570695787"
-		Button1.ImageColor3 = Color3.fromRGB(50, 50, 50)
-		Button1.ScaleType = Enum.ScaleType.Slice
-		Button1.SliceCenter = Rect.new(100, 100, 100, 100)
-		Button1.SliceScale = 0.030
-
-		Title_2.Name = "Title"
-		Title_2.Parent = Button1
-		Title_2.AnchorPoint = Vector2.new(0, 0.5)
-		Title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-		Title_2.BackgroundTransparency = 1.000
-		Title_2.Position = UDim2.new(0, 0, 0.5, 0)
-		Title_2.Size = UDim2.new(1, 0, 1, 0)
-		Title_2.ZIndex = 5
-		Title_2.Font = Enum.Font.TitilliumWeb
-		Title_2.Text = name or "New Button"
-		Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title_2.TextScaled = true
-		Title_2.TextSize = 14.000
-		Title_2.TextStrokeTransparency = 0.000
-		Title_2.TextWrapped = true
-
-		name.Button.MouseEnter:Connect(function()
-			name.Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
+		Button.MouseEnter:Connect(function()
+		Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
 		end)
-		name.Button.MouseLeave:Connect(function()
-			name.Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
+		Button.MouseLeave:Connect(function()
+		Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
 		end)
 	end
 end
@@ -515,42 +555,4 @@ Fill.ScaleType = Enum.ScaleType.Slice
 Fill.SliceCenter = Rect.new(100, 100, 100, 100)
 Fill.SliceScale = 0.030
 
-ButtonHolder1.Name = "ButtonHolder1"
-ButtonHolder1.Parent = Tab
-ButtonHolder1.AnchorPoint = Vector2.new(0.5, 0.5)
-ButtonHolder1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ButtonHolder1.BackgroundTransparency = 1.000
-ButtonHolder1.BorderSizePixel = 0
-ButtonHolder1.Position = UDim2.new(0.5, 0, 0.5, 0)
-ButtonHolder1.Size = UDim2.new(1, 0, 0.150000006, 0)
-ButtonHolder1.ZIndex = 5
-
-Button.Name = "Button"
-Button.Parent = ButtonHolder1
-Button.AnchorPoint = Vector2.new(0.5, 0.5)
-Button.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Button.BackgroundTransparency = 1.000
-Button.Position = UDim2.new(0.5, 0, 0.5, 0)
-Button.Size = UDim2.new(1, 0, 1, 0)
-Button.ZIndex = 6
-Button.Image = "rbxassetid://3570695787"
-Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
-Button.ScaleType = Enum.ScaleType.Slice
-Button.SliceCenter = Rect.new(100, 100, 100, 100)
-Button.SliceScale = 0.060
-
-Title_4.Name = "Title"
-Title_4.Parent = Button
-Title_4.AnchorPoint = Vector2.new(0.5, 0.5)
-Title_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Title_4.BackgroundTransparency = 1.000
-Title_4.Position = UDim2.new(0.5, 0, 0.5, 0)
-Title_4.Size = UDim2.new(1, 0, 0.5, 0)
-Title_4.ZIndex = 7
-Title_4.Font = Enum.Font.FredokaOne
-Title_4.Text = "N/A"
-Title_4.TextColor3 = Color3.fromRGB(169, 169, 169)
-Title_4.TextScaled = true
-Title_4.TextSize = 14.000
-Title_4.TextStrokeTransparency = 0.000
-Title_4.TextWrapped = true  --]]
+  --]]
