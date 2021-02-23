@@ -8,7 +8,7 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
-local version = " v1.5"
+local version = " v1.51"
 
 local function RandomName()
 	local data = ""
@@ -383,7 +383,7 @@ function Library:CreateMain()
 		ZIndex = 4,
 		CanvasSize = UDim2.new(0, 0, 3, 0),
 		ScrollBarThickness = 0,
-		Visible = false
+		Visible = true
 	})
 		local UIGridLayout = self:Create("UIGridLayout", {
 		Parent = Tab,
