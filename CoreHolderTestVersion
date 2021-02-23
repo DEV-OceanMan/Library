@@ -8,7 +8,7 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
-local version = " v1.5"
+local version = " v1.6"
 
 local function RandomName()
 	local data = ""
@@ -129,7 +129,7 @@ function Library:CreateMain()
 	end)
 
 	UILibrary.Name = "UI-Library"
-	UILibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")  --game:GetService("CoreGui")
+	UILibrary.Parent = game:GetService("CoreGui")
 	UILibrary.ResetOnSpawn = false
 	UILibrary.DisplayOrder = 10
 	UILibrary.Name = RandomName()
