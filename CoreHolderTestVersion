@@ -8,7 +8,7 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
-local version = " v1.51"
+local version = " v1.4"
 
 local function RandomName()
 	local data = ""
@@ -370,6 +370,7 @@ function Library:CreateMain()
 
 	function Library:NewTab(name)
 		TabCount = TabCount + 1
+		ButtonCount[TabCount] = 0
 		local Tab = self:Create("ScrollingFrame", {
 		Name = tostring(TabCount),
 		Parent = SectionsContainer,
@@ -383,7 +384,7 @@ function Library:CreateMain()
 		ZIndex = 4,
 		CanvasSize = UDim2.new(0, 0, 3, 0),
 		ScrollBarThickness = 0,
-		Visible = true
+		Visible = false
 	})
 		local UIGridLayout = self:Create("UIGridLayout", {
 		Parent = Tab,
@@ -426,7 +427,7 @@ function Library:CreateMain()
 	end
 
 	function Library:NewButton(Tab,Text,Callback)
-		--ButtonCount[tonumber(Tab.Name)] = ButtonCount[tonumber(Tab.Name)]+1
+		ButtonCount[tonumber(Tab.Name)] = ButtonCount[tonumber(Tab.Name)]+1
 		local ButtonHolder = self:Create("Frame", {
 		Parent = Tab,
 		AnchorPoint = Vector2.new(0.5, 0.5),
