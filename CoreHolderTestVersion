@@ -368,10 +368,8 @@ function Library:CreateMain()
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
 
-	local GamerLibrary = {}
-
-	function GamerLibrary:NewTab(name)	
-
+	function Library:NewTab(name)	
+		
 		local Home = Instance.new("ScrollingFrame")
 		local UIGridLayout_2 = Instance.new("UIGridLayout")
 
@@ -401,7 +399,7 @@ function Library:CreateMain()
 		end)
 	end
 
-	function GamerLibrary:NewButton(name)
+	function Library:NewButton(name)
 
 		local Button1 = Instance.new("ImageButton")
 		local Title_2 = Instance.new("TextLabel")
@@ -436,7 +434,6 @@ function Library:CreateMain()
 		Title_2.TextWrapped = true
 
 	end
-	return GamerLibrary;
 end
 return Library;
 
