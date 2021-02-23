@@ -8,7 +8,7 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
-local version = " v1.42"
+local version = " v1.43"
 
 local function RandomName()
 	local data = ""
@@ -64,7 +64,7 @@ end
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 local TabCount = 0
-local ButtonCount = {}
+local ButtonCount = 0
 
 function Library:CreateMain()
 	local Info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
@@ -369,13 +369,12 @@ function Library:CreateMain()
 
 	function Library:NewTab(name)
 		TabCount = TabCount + 1
-		ButtonCount[TabCount] = 0
 		local Tab = self:Create("ScrollingFrame", {
 		Name = tostring(TabCount),
 		Parent = SectionsContainer,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-		BackgroundTransparency = 1.000,
+		BackgroundTransparency = 0,
 		BorderSizePixel = 0,
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Selectable = false,
@@ -386,7 +385,7 @@ function Library:CreateMain()
 		Visible = false
 	})
 		local UIGridLayout = self:Create("UIGridLayout", {
-		Parent = Tab,
+		Parent = SectionsContainer,
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		CellPadding = UDim2.new(0, 0, 0, 5),
 		CellSize = UDim2.new(1, 0, 0.0500000007, 0),
@@ -426,7 +425,9 @@ function Library:CreateMain()
 	end
 
 	function Library:NewButton(Tab,Text,Callback)
+		ButtonCount = ButtonCount + 1
 		local ButtonHolder = self:Create("Frame", {
+		Name = tostring(ButtonCount),
 		Parent = Tab,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -435,6 +436,12 @@ function Library:CreateMain()
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Size = UDim2.new(1, 0, 0.150000006, 0),
 		ZIndex = 5,
+	})
+		local UIGridLayout = self:Create("UIGridLayout", {
+		Parent = ButtonCount,
+		SortOrder = Enum.SortOrder.LayoutOrder,
+		CellPadding = UDim2.new(0, 0, 0, 5),
+		CellSize = UDim2.new(1, 0,0.05, 0),
 	})
 		local Button = self:Create("ImageButton", {
 		Name = "Button",
