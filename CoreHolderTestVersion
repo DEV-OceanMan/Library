@@ -426,8 +426,7 @@ function Library:CreateMain()
 	end
 
 	function Library:NewButton(Tab,Text,Callback)
-		ButtonCount[tonumber(Tab.Name)] = ButtonCount[tonumber(Tab.Name)]+1
-		
+		--ButtonCount[tonumber(Tab.Name)] = ButtonCount[tonumber(Tab.Name)]+1
 		local ButtonHolder = self:Create("Frame", {
 		Parent = Tab,
 		AnchorPoint = Vector2.new(0.5, 0.5),
