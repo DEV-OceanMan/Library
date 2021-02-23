@@ -8,7 +8,7 @@
 			    \/_/\/_/\/___/  \/___/   \/___/   \/___/   \/_____/\/___/   \/_/\/_/
  --]]
 
-local version = " v2.0"
+local version = " v2.1"
 
 local function RandomName()
 	local data = ""
@@ -372,7 +372,7 @@ function Library:CreateMain()
 			Parent = SectionsContainer,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-			BackgroundTransparency = 1.000,
+			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			Selectable = false,
@@ -426,8 +426,8 @@ function Library:CreateMain()
 		local ButtonHolder = self:Create("Frame", {
 			Parent = FrameContainer.SlideContainer.Holder.SectionsContainer:WaitForChild("Tab"),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-			BackgroundTransparency = 1.000,
+			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			Size = UDim2.new(1, 0, 0.150000006, 0),
