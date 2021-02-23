@@ -67,7 +67,6 @@ local TabCount = 0
 local ButtonCount = {}
 
 function Library:CreateMain()
-
 	local Info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
 	local T1 = TS:Create(Resize, Info, {Rotation = -90})
 	local T2 = TS:Create(Resize, Info, {Rotation = 90})
@@ -130,7 +129,7 @@ function Library:CreateMain()
 	end)
 
 	UILibrary.Name = "UI-Library"
-	UILibrary.Parent = game:GetService("CoreGui")
+	UILibrary.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")  --game:GetService("CoreGui")
 	UILibrary.ResetOnSpawn = false
 	UILibrary.DisplayOrder = 10
 	UILibrary.Name = RandomName()
