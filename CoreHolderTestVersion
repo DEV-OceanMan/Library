@@ -370,7 +370,7 @@ function Library:CreateMain()
 	function Library:NewTab(name)
 		TabCount = TabCount + 1
 		local Tab = self:Create("ScrollingFrame", {
-		Name = tostring(TabCount),
+		Name = Tab69  -- tostring(TabCount),
 		Parent = SectionsContainer,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		BackgroundColor3 = Color3.fromRGB(255, 255, 255),
