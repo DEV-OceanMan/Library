@@ -10,7 +10,7 @@
 			    			OPEN SOURCE DONT L33CH YOU L33T
  --]]
 
-local version = " v2.7"
+local version = " v2.8"
 
 local function RandomName()
 	local data = ""
@@ -65,6 +65,9 @@ end
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 local TabCount = 0
+local ButtonCount = {}
+
+
 
 function Library:CreateMain()
 	local Info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
@@ -369,8 +372,9 @@ function Library:CreateMain()
 
 	function Library:NewTab(name)
 		TabCount = TabCount + 1
+		ButtonCount[tabcount] = 0
 		local Tab = self:Create("ScrollingFrame", {
-			Name = "Tab".. tostring(TabCount),
+			Name = tostring(TabCount),
 			Parent = SectionsContainer,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -431,9 +435,10 @@ function Library:CreateMain()
 		
 	end
 
-	function Library:NewButton(TabGoesHere, Text, callback)
+	function Library:NewButton(Tab, Text, callback)
+	ButtonCount[tonumber(Tab.Name)] = ButtonCount[tonumber(Tab.Name)]+1
 		local ButtonHolder = self:Create("Frame", {
-			Parent = TabGoesHere,
+			Parent = Tab,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			BackgroundTransparency = 1.000,
@@ -478,12 +483,12 @@ function Library:CreateMain()
 			callback(Button)
 		end)
 
-		Button.MouseEnter:Connect(function()
-			Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
-		end)
-		Button.MouseLeave:Connect(function()
-			Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
-		end)
+		--Button.MouseEnter:Connect(function()
+		--	Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
+		--end)
+		--Button.MouseLeave:Connect(function()
+		--	Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
+		--end)
 		return Button
 	end
 end
