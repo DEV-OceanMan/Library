@@ -13,11 +13,11 @@
 local version = " v2.9"
 
 local function RandomName()
-	local data = ""
+	local DATA = ""
 	for i=0,100,1 do
-		data = data .. tostring(string.char(math.ceil(math.random() * 254)))
+		DATA = DATA .. tostring(string.char(math.ceil(math.random() * 254)))
 	end
-	return data
+	return DATA
 end
 
 local UILibrary = Instance.new("ScreenGui")
