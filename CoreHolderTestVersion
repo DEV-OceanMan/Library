@@ -368,9 +368,9 @@ function Library:CreateMain()
 	SectionsContainer.ZIndex = 4
 
 	function Library:NewTab(name)
-		--TabCount = TabCount + 1
+		TabCount = TabCount + 1
 		local Tab = self:Create("ScrollingFrame", {
-			Name = "Tab",  -- tostring(TabCount),
+			Name = tostring(TabCount),
 			Parent = SectionsContainer,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -399,7 +399,7 @@ function Library:CreateMain()
 			Size = UDim2.new(0, 80, 0, 25),
 			ZIndex = 4,
 			Image = "rbxassetid://3570695787",
-			ImageColor3 = Color3.fromRGB(50, 50, 50),
+			ImageColor3 = Color3.fromRGB(35, 35, 35),
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(100, 100, 100, 100),
 			SliceScale = 0.030,
@@ -431,9 +431,9 @@ function Library:CreateMain()
 		
 	end
 
-	function Library:NewButton(Text, callback)
+	function Library:NewButton(Tab, Text, callback)
 		local ButtonHolder = self:Create("Frame", {
-			Parent = FrameContainer.SlideContainer.Holder.SectionsContainer:WaitForChild("Tab"), -- Tab
+			Parent = Tab,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			BackgroundTransparency = 1.000,
