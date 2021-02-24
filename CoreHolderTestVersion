@@ -10,7 +10,7 @@
 			    			OPEN SOURCE DONT L33CH YOU L33T
  --]]
 
-local version = " v2.5"
+local version = " v2.6"
 
 local function RandomName()
 	local data = ""
@@ -370,7 +370,7 @@ function Library:CreateMain()
 	function Library:NewTab(name)
 		TabCount = TabCount + 1
 		local Tab = self:Create("ScrollingFrame", {
-			Name = tostring(TabCount),
+			Name = "Tab".. tostring(TabCount),
 			Parent = SectionsContainer,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
