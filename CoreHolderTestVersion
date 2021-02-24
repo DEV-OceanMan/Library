@@ -10,7 +10,7 @@
 			    			OPEN SOURCE DONT L33CH YOU L33T
  --]]
 
-local version = " v2.4"
+local version = " v2.5"
 
 local function RandomName()
 	local data = ""
@@ -368,7 +368,7 @@ function Library:CreateMain()
 	SectionsContainer.ZIndex = 4
 
 	function Library:NewTab(name)
-		TabCount = TabCount + 1
+		--TabCount = TabCount + 1
 		local Tab = self:Create("ScrollingFrame", {
 			Name = "Tab",  -- tostring(TabCount),
 			Parent = SectionsContainer,
@@ -421,11 +421,19 @@ function Library:CreateMain()
 			TextStrokeTransparency = 0.000,
 			TextWrapped = true,
 		})
+		
+		Button.MouseEnter:Connect(function()
+			Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
+		end)
+		Button.MouseLeave:Connect(function()
+			Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
+		end)
+		
 	end
 
-	function Library:NewButton(Text,Callback)
+	function Library:NewButton(Text, callback)
 		local ButtonHolder = self:Create("Frame", {
-			Parent = FrameContainer.SlideContainer.Holder.SectionsContainer:WaitForChild("Tab"),
+			Parent = FrameContainer.SlideContainer.Holder.SectionsContainer:WaitForChild("Tab"), -- Tab
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			BackgroundTransparency = 1.000,
@@ -467,16 +475,16 @@ function Library:CreateMain()
 			TextWrapped = true,
 		})	
 		Button.MouseButton1Click:Connect(function()
-			Callback(Button)
+			callback(Button)
 		end)
 
 		Button.MouseEnter:Connect(function()
 			Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
 		end)
 		Button.MouseLeave:Connect(function()
-	  	Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
+			Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
 		end)
-		return button
+		return Button
 	end
 end
 return Library;
