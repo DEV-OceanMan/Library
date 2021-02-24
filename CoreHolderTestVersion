@@ -65,9 +65,6 @@ end
 local UIS = game:GetService("UserInputService")
 local TS = game:GetService("TweenService")
 local TabCount = 0
-local ButtonCount = {}
-
-
 
 function Library:CreateMain()
 	local Info = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
@@ -372,7 +369,6 @@ function Library:CreateMain()
 
 	function Library:NewTab(name)
 		TabCount = TabCount + 1
-		ButtonCount[TabCount] = 0
 		local Tab = self:Create("ScrollingFrame", {
 			Name = tostring(TabCount),
 			Parent = SectionsContainer,
@@ -436,7 +432,6 @@ function Library:CreateMain()
 	end
 
 	function Library:NewButton(Tab, Text, callback)
-	ButtonCount[tonumber(Tab.Name)] = ButtonCount[tonumber(Tab.Name)]+1
 		local ButtonHolder = self:Create("Frame", {
 			Parent = Tab,
 			AnchorPoint = Vector2.new(0.5, 0.5),
