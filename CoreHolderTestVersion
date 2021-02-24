@@ -10,7 +10,7 @@
 			    			OPEN SOURCE DONT L33CH YOU L33T
  --]]
 
-local version = " v2.6"
+local version = " v2.7"
 
 local function RandomName()
 	local data = ""
@@ -431,9 +431,9 @@ function Library:CreateMain()
 		
 	end
 
-	function Library:NewButton(Tab, Text, callback)
+	function Library:NewButton(TabGoesHere, Text, callback)
 		local ButtonHolder = self:Create("Frame", {
-			Parent = Tab,
+			Parent = TabGoesHere,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			BackgroundTransparency = 1.000,
