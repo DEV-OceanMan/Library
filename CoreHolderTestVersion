@@ -10,7 +10,7 @@
 			    			OPEN SOURCE DONT L33CH YOU L33T
  --]]
 
-local version = " v2.8"
+local version = " v2.9"
 
 local function RandomName()
 	local data = ""
@@ -372,7 +372,7 @@ function Library:CreateMain()
 
 	function Library:NewTab(name)
 		TabCount = TabCount + 1
-		ButtonCount[tabcount] = 0
+		ButtonCount[TabCount] = 0
 		local Tab = self:Create("ScrollingFrame", {
 			Name = tostring(TabCount),
 			Parent = SectionsContainer,
