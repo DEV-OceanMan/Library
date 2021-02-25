@@ -489,12 +489,12 @@ function Library:CreateMain()
 			callback(Button)
 		end)
 
-		--Button.MouseEnter:Connect(function()
-		--	Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
-		--end)
-		--Button.MouseLeave:Connect(function()
-		--	Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
-		--end)
+		Button.MouseEnter:Connect(function()
+			Button.ImageColor3 = Color3.fromRGB(50, 50, 50)
+		end)
+		Button.MouseLeave:Connect(function()
+			Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
+		end)
 		return Button
 	end
 end
