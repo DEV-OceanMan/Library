@@ -10,7 +10,7 @@
 			    			OPEN SOURCE DONT L33CH YOU L33T
  --]]
 
-local version = " v3.1"
+local version = " v3.2"
 
 local function RandomName()
 	local DATA = ""
@@ -368,7 +368,7 @@ function Library:CreateMain()
 	SectionsContainer.Size = UDim2.new(0.74000001, 0, 0.892964363, 0)
 	SectionsContainer.ZIndex = 4
 
-	function Library:NewTab(name)
+	function Library:NewTab(Name)
 		TabCount = TabCount + 1
 		local Tab = self:Create("ScrollingFrame", {
 			Name = tostring(TabCount),
@@ -415,7 +415,7 @@ function Library:CreateMain()
 			Size = UDim2.new(1, 0, 1, 0),
 			ZIndex = 5,
 			Font = Enum.Font.TitilliumWeb,
-			Text = name or "New Button",
+			Text = Name or "Button",
 			TextColor3 = Color3.fromRGB(255, 255, 255),
 			TextScaled = true,
 			TextSize = 14.000,
@@ -430,16 +430,16 @@ function Library:CreateMain()
 			Button.ImageColor3 = Color3.fromRGB(35, 35, 35)
 		end)
 		
-		table.insert(Tabs, {tab = Tab, tabname = Tab.Name})
+		table.insert(Tabs, {tab = Tab, TabName = Tab.Name})
 		
 	end
 
 	function Library:NewButton(Tab, Text, callback)
 		
 		Tab = Tab:match("%d")
-		for _, tabTable in pairs(Tabs) do
-			if tabTable.tabname == Tab then
-				Tab = tabTable
+		for _, TabTable in pairs(Tabs) do
+			if TabTable.TabName == Tab then
+				Tab = TabTable
 			end
 		end
 		
