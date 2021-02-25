@@ -10,7 +10,7 @@
 			    			OPEN SOURCE DONT L33CH YOU L33T
  --]]
 
-local version = " v3"
+local version = " v3.1"
 
 local function RandomName()
 	local DATA = ""
@@ -436,6 +436,7 @@ function Library:CreateMain()
 
 	function Library:NewButton(Tab, Text, callback)
 		
+		Tab = Tab:match("%d")
 		for _, tabTable in pairs(Tabs) do
 			if tabTable.tabname == Tab then
 				Tab = tabTable
