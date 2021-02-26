@@ -10,7 +10,7 @@
 			    			OPEN SOURCE DONT L33CH YOU L33T
  --]]
 
-local version = " v3.3"
+local version = " v3.4"
 
 local function RandomName()
 	local DATA = ""
@@ -433,7 +433,7 @@ function Library:CreateMain()
 
 	end
 
-	function Library:NewButton(Tab, Text)
+	function Library:NewButton(Tab, Text, callback)
 		Tab = Tab:match("%d")
 		for _, TabTable in pairs(Tabs) do
 			if TabTable.TabName == Tab then
@@ -591,15 +591,16 @@ function Library:CreateMain()
 		Toggle.MouseButton1Click:Connect(function()
 			if Fill.Size == UDim2.new(0.9, -1,0.9, -1) then
 				Fill:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.1 )
+				callback(Toggle)
 			else	
 				if Fill.Size == UDim2.new(0, 0, 0, 0) then
 					Fill:TweenSize(UDim2.new(0.9, -1,0.9, -1), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.1 )
+					callback(Toggle)
 				end
 			end
 		end)
-		
-		return Toggle
-	end
+	return Toggle
+end
 	
 end
-return Library;
+	return Library;
