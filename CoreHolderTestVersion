@@ -588,7 +588,6 @@ function Library:CreateMain()
 			SliceCenter = Rect.new(100, 100, 100, 100),
 			SliceScale = 0.030,
 		})
-		
 		Toggle.MouseButton1Click:Connect(function()
 			if Fill.Size == UDim2.new(0.9, -1,0.9, -1) then
 				Fill:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.1 )
