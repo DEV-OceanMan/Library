@@ -495,7 +495,7 @@ function Library:CreateMain()
 		end)
 		return Button
 	end
-	
+
 	function Library:NewToggle(Tab, Text, callback)
 		Tab = Tab:match("%d")
 		for _, TabTable in pairs(Tabs) do
@@ -503,7 +503,7 @@ function Library:CreateMain()
 				Tab = TabTable
 			end
 		end
-		
+
 		local ToggleHolder = self:Create("Frame", {
 			Name = "ToggleHolder",
 			Parent = Tab.tab,
@@ -515,7 +515,7 @@ function Library:CreateMain()
 			Size = UDim2.new(1, 0, 0.150000006, 0),
 			ZIndex = 5,
 		})
-		
+
 		local Toggle = self:Create("ImageButton", {
 			Name = "Toggle",
 			Parent = ToggleHolder,
@@ -535,7 +535,7 @@ function Library:CreateMain()
 			Active = true,
 
 		})
-		
+
 		local Title = self:Create("TextLabel", {
 			Name = "Title",
 			Parent = ToggleHolder,
@@ -554,7 +554,7 @@ function Library:CreateMain()
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 		})
-		
+
 		local Icon = self:Create("ImageLabel", {
 			Name = "Icon",
 			Parent = Toggle,
@@ -569,7 +569,7 @@ function Library:CreateMain()
 			ScaleType = Enum.ScaleType.Fit,
 			SliceScale = 0.000,
 		})
-		
+
 		local Fill = self:Create("ImageLabel", {
 			Name = "Fill",
 			Parent = Toggle,
@@ -588,19 +588,22 @@ function Library:CreateMain()
 			SliceCenter = Rect.new(100, 100, 100, 100),
 			SliceScale = 0.030,
 		})
+		
+		local toggle = false
+		
 		Toggle.MouseButton1Click:Connect(function()
 			if Fill.Size == UDim2.new(0.9, -1,0.9, -1) then
 				Fill:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.1 )
-				callback(Toggle)
+				callback(Toggle.toggleFunctions.on())
 			else	
 				if Fill.Size == UDim2.new(0, 0, 0, 0) then
 					Fill:TweenSize(UDim2.new(0.9, -1,0.9, -1), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.1 )
-					callback(Toggle)
+					callback(Toggle.toggleFunctions.off())
 				end
 			end
 		end)
-	return Toggle
+		return Toggle
+	end
+
 end
-	
-end
-	return Library;
+return Library
