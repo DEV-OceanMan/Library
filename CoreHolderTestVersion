@@ -594,11 +594,13 @@ function Library:CreateMain()
 		Toggle.MouseButton1Click:Connect(function()
 			if Fill.Size == UDim2.new(0.9, -1,0.9, -1) then
 				Fill:TweenSize(UDim2.new(0, 0, 0, 0), Enum.EasingDirection.In, Enum.EasingStyle.Linear, 0.1 )
-				callback(Toggle.toggleFunctions.on())
+				local callbackCall = callback()
+				callbackCall.on()
 			else	
 				if Fill.Size == UDim2.new(0, 0, 0, 0) then
 					Fill:TweenSize(UDim2.new(0.9, -1,0.9, -1), Enum.EasingDirection.Out, Enum.EasingStyle.Linear, 0.1 )
-					callback(Toggle.toggleFunctions.off())
+					local callbackCall = callback()
+					callbackCall.off()
 				end
 			end
 		end)
