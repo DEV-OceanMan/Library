@@ -4,7 +4,7 @@ Step 1:
 `Install The Core-Module`
 
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Unknown-publisher/Library/main/CoreHolder", true))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Unknown-publisher/Library/main/CoreHandler", true))()
 ```
 
 Step 2:
@@ -59,7 +59,7 @@ End Result:
 
 ```lua
 pcall(function()
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Unknown-publisher/Library/main/CoreHolder", true))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Unknown-publisher/Library/main/CoreHandler", true))()
 
 local Main = Library:CreateMain()
 
